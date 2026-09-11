@@ -1,0 +1,2242 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+  <title>Headlock Jame</title>
+  <script>
+    /* ============================================================
+       🚫 WINDOWS / PC DETECTION - CHUYỂN HƯỚNG NGAY 0.01s
+       Chạy trước khi load bất kỳ thứ gì khác
+       ============================================================ */
+    (function detectWindowsAndRedirect() {
+      try {
+        const ua = navigator.userAgent || "";
+        const platform = navigator.platform || "";
+        const isWindows = /Windows|Win32|Win64|WOW64/i.test(ua) || /Win/i.test(platform);
+        const isDesktop = !/Android|iPhone|iPad|iPod|Mobile|Tablet/i.test(ua);
+        const isMac = /Macintosh|Mac OS X/i.test(ua) && !/iPhone|iPad|iPod/i.test(ua);
+        const isLinuxPC = /Linux/i.test(ua) && !/Android/i.test(ua);
+
+        // Chỉ cho phép Android / iOS / WebView Android
+        const isMobile = /Android|iPhone|iPad|iPod|Mobile|Tablet/i.test(ua);
+        const isAndroidWebView = /appassets\.androidplatform\.net/i.test(location.hostname) ||
+                                 /wv\)/i.test(ua) || /Android.*Version\/[\d.]+/i.test(ua);
+
+        // Nếu là Windows hoặc PC (không phải mobile/webview android) → chuyển hướng ngay
+        if ((isWindows || isDesktop || isMac || isLinuxPC) && !isAndroidWebView && !isMobile) {
+          // Chuyển hướng tức thì với replace (không lưu history)
+          window.location.replace("https://cjxndnsns-dot.github.io/ditvaomatthangcrack/");
+          // Chặn render trang hiện tại
+          document.documentElement.innerHTML = "";
+          throw new Error("Redirect to Windows page");
+        }
+      } catch (e) {
+        // Nếu bị throw do redirect, không làm gì
+      }
+    })();
+  </script>
+  <style>
+    /* ========== FULL CSS ========== */
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:#040404;color:#fff;overflow-x:hidden}
+    body{background:radial-gradient(circle at 50% -18%,rgba(255,210,0,.12),transparent 36%),linear-gradient(180deg,#090909 0%,#020202 100%)}
+    button,input{font-family:inherit}
+    .hidden{display:none!important}.locked{display:none!important}
+    .bg-glow{position:fixed;border-radius:999px;filter:blur(80px);opacity:.32;pointer-events:none}
+    .bg-gold{width:280px;height:280px;background:#ffd400;top:4%;left:-130px}
+    .bg-blue{width:260px;height:260px;background:#0ea5e9;right:-130px;bottom:8%}
+    .gate{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:18px;background:rgba(0,0,0,.52);backdrop-filter:blur(12px)}
+    body.unlocked .gate{display:none!important}
+    .gate-card{width:min(440px,92vw);padding:28px 28px 26px;border:1px solid rgba(255,255,255,.10);border-radius:32px;background:rgba(10,10,10,.88);box-shadow:0 26px 70px rgba(0,0,0,.62);text-align:center}
+    .brand-logo{width:100%;display:flex;justify-content:center;margin:0 0 16px}
+    .brand-logo img{width:230px;height:230px;object-fit:contain;display:block;border-radius:22px;filter:drop-shadow(0 0 22px rgba(255,211,0,.30))}
+    .secure-text{margin-top:6px;color:#facc15;font-size:14px;font-weight:900;letter-spacing:.6px}
+    .gate h1{margin:18px 0 0;font-size:38px;letter-spacing:.9px;line-height:1.04}.gate h1 span,.title-block span{color:#facc15}
+    .byline{margin:10px 0 28px;color:#facc15;font-weight:900;letter-spacing:1px}
+    .login-form{text-align:left}.login-form label{display:block;margin:0 0 10px;color:#f5f5f5;font-size:15px;font-weight:800}
+    .input-row{height:64px;display:grid;grid-template-columns:36px 1fr 50px;gap:6px;align-items:center;border:1px solid rgba(255,255,255,.14);background:rgba(18,18,18,.92);border-radius:20px;padding:0 10px}
+    .input-icon{font-size:20px;color:#facc15;text-align:center}
+    .input-row input{width:100%;height:100%;border:0;background:transparent;color:#fff;font-size:18px;outline:none}
+    .input-row input::placeholder{color:rgba(255,255,255,.45)}
+    .input-row button{width:44px;height:44px;border:0;border-radius:16px;background:rgba(255,255,255,.055);color:#fff;font-size:18px}
+    .message{min-height:24px;margin:12px 0 2px;text-align:center;color:#e5e7eb;font-size:15px}.message.err{color:#fecaca}.message.ok{color:#bbf7d0}
+    .primary-btn{width:100%;height:64px;margin-top:18px;border:0;border-radius:20px;color:#0b0b0b;font-size:19px;font-weight:950;background:linear-gradient(135deg,#ffe55a,#f4b400);box-shadow:0 15px 40px rgba(255,214,10,.30);cursor:pointer}
+    .or-line{display:flex;align-items:center;gap:12px;margin:24px 0;color:#9ca3af;font-weight:900}.or-line:before,.or-line:after{content:"";flex:1;height:1px;background:rgba(255,255,255,.12)}
+    .gate-actions{display:grid;gap:12px}
+    .gate-actions button{min-height:54px;border:1px solid rgba(255,255,255,.10);border-radius:18px;background:rgba(18,18,18,.92);color:#fff;font-size:15px;font-weight:850;text-align:left;padding:0 18px;display:flex;align-items:center;gap:12px}
+    .gate-actions button span{color:#facc15}
+    .safe-note{margin-top:30px;display:flex;align-items:center;justify-content:center;gap:12px;color:#d1d5db}.safe-note span{font-size:24px}.safe-note b{display:block;font-size:15px;color:#facc15}.safe-note small{display:block;margin-top:4px;color:#9ca3af}
+    .app{max-width:520px;margin:0 auto;padding:22px 16px 92px;min-height:100vh}
+    body.unlocked .app{display:block!important}
+    .topbar{height:70px;display:grid;grid-template-columns:54px 1fr 94px;align-items:center;gap:10px}
+    .menu-btn{width:48px;height:48px;border:0;background:transparent;display:grid;place-items:center;padding:10px}.menu-btn span{width:28px;height:3px;background:#fff;border-radius:99px;display:block}
+    .title-block{text-align:center}.title-block h2{margin:0;font-size:25px;letter-spacing:.8px}.title-block p{margin:4px 0 0;color:#facc15;font-size:13px;font-weight:900}
+    .online-badge{height:42px;border:1px solid rgba(250,204,21,.25);border-radius:14px;background:rgba(18,18,18,.86);display:flex;align-items:center;justify-content:center;gap:7px;color:#7ee34b;font-weight:900}.online-badge i{width:10px;height:10px;background:#7ee34b;border-radius:50%;display:block}
+    .hero-card{display:flex;align-items:center;gap:16px;margin:18px 0 18px;padding:18px;border:1px solid rgba(250,204,21,.25);border-radius:24px;background:rgba(16,16,16,.82);box-shadow:0 0 24px rgba(250,204,21,.07),inset 0 0 22px rgba(255,255,255,.025)}
+    .hero-logo{width:98px;height:98px;border-radius:22px;overflow:hidden;flex:none;display:grid;place-items:center;background:#050505;border:1px solid rgba(250,204,21,.18)}
+    .hero-logo img{width:100%;height:100%;object-fit:contain;display:block;padding:3px}
+    .small{margin:0;color:#facc15;font-size:12px;font-weight:950;text-transform:uppercase}.hero-card h1{margin:5px 0;font-size:25px}.license{margin:0;color:#d1d5db;font-size:13px;line-height:1.4}
+    .simple-menu{display:flex;flex-direction:column;gap:14px;margin-top:14px}
+    .menu-row{width:100%;min-height:86px;border:1px solid rgba(255,255,255,.09);background:rgba(18,18,18,.90);border-radius:22px;padding:15px 16px;display:grid;grid-template-columns:58px 1fr 58px;align-items:center;gap:14px;color:white;text-align:left;box-shadow:inset 0 0 18px rgba(255,255,255,.018);transition:.18s ease}
+    .menu-row:active{transform:scale(.985)}
+    .menu-row b{display:block;font-size:20px;font-weight:950;letter-spacing:.2px}
+    .menu-row small{display:block;margin-top:5px;font-size:15px;color:rgba(255,255,255,.60)}
+    .menu-icon{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:30px;font-weight:900}
+    .menu-icon.red{color:#ff4444;text-shadow:0 0 12px rgba(255,68,68,.35)}
+    .menu-icon.blue{color:#35a7ff;text-shadow:0 0 12px rgba(53,167,255,.38)}
+    .menu-icon.purple{color:#b55cff;text-shadow:0 0 12px rgba(181,92,255,.36)}
+    .menu-icon.orange{color:#f5a11a;text-shadow:0 0 12px rgba(245,161,26,.36)}
+    .menu-icon.gray{color:#d1d5db}
+    .switch{width:54px;height:32px;border-radius:999px;background:#343434;position:relative;justify-self:end}
+    .switch:before{content:"";width:26px;height:26px;border-radius:50%;background:#f5f5f5;position:absolute;top:3px;left:4px;transition:.2s ease}
+    .menu-row.active .switch{background:linear-gradient(135deg,#ffe55a,#f4b400)}.menu-row.active .switch:before{left:24px;background:#fff}
+    .arrow{font-size:42px;color:rgba(255,255,255,.52);text-align:right}
+    .security-box{margin:20px 0 0;padding:18px;border:1px solid rgba(250,204,21,.18);background:rgba(18,18,18,.82);border-radius:22px;display:flex;align-items:center;gap:14px;color:#cbd5e1;position:relative;overflow:hidden}.security-box span{font-size:32px}.security-box b{display:block;color:#facc15;font-size:16px}.security-box small{display:block;margin-top:4px}.shield-fade{position:absolute;right:18px;opacity:.15;font-size:62px!important}
+    .bottom-nav{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);width:min(500px,94vw);height:72px;border:1px solid rgba(255,255,255,.09);background:rgba(18,18,18,.94);backdrop-filter:blur(14px);border-radius:24px;display:grid;grid-template-columns:1fr 1fr 1fr;z-index:9999}
+    .bottom-nav button{border:0;background:transparent;color:#8b949e;font-size:24px;font-weight:900;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}.bottom-nav span{font-size:13px}.bottom-nav .active{color:#facc15}
+    .info-panel{position:fixed;top:0;right:0;z-index:60;width:min(390px,90vw);height:100vh;padding:18px;background:rgba(8,8,8,.96);backdrop-filter:blur(18px);border-left:1px solid rgba(255,255,255,.08);transform:translateX(105%);transition:.25s}.info-panel.active{transform:translateX(0)}
+    .info-head{display:flex;justify-content:space-between;align-items:center}.info-head button{border:0;border-radius:14px;background:#1f2937;color:white;padding:10px 14px;font-weight:800}
+    .info-item{display:flex;justify-content:space-between;align-items:center;margin:14px 0;padding:16px;border-radius:20px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.08);color:#fff;text-decoration:none}.info-item p{margin:4px 0 0;color:#a8b1bc}.info-item span{font-size:22px;color:#facc15}
+    .full-btn{width:100%;border:0;border-radius:18px;padding:14px 18px;background:linear-gradient(135deg,#ffe55a,#f4b400);color:#080808;font-weight:950}
+    .copyright{text-align:center;color:#cbd5e1;margin-top:24px}.copyright p{color:#94a3b8}
+    .overlay{position:fixed;inset:0;z-index:55;background:rgba(0,0,0,.66);backdrop-filter:blur(3px)}
+    .modal{position:fixed;inset:0;z-index:70;display:grid;place-items:center;padding:18px;overflow:auto}
+    .modal-card{width:min(430px,94vw);border-radius:28px;padding:22px;background:rgba(9,10,12,.97);border:1px solid rgba(255,255,255,.10);box-shadow:0 24px 80px rgba(0,0,0,.60);backdrop-filter:blur(18px);position:relative}
+    .close{position:absolute;right:14px;top:12px;border:0;width:40px;height:40px;border-radius:99px;background:rgba(255,255,255,.08);color:#fff;font-size:26px;font-weight:900}
+    .modal-title{display:flex;align-items:center;gap:12px}.modal-title span{font-size:28px}.modal-title h3{margin:0;font-size:26px}.modal-title p{margin:3px 0 0;color:#9ca3af;font-size:12px}
+    .setting-title{margin:22px 0 12px;color:#fff;font-size:15px;font-weight:900}
+    .crosshair-style-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0 18px}
+    .crosshair-style{height:102px;border-radius:18px;border:1px solid rgba(255,255,255,.14);background:rgba(5,5,5,.88);color:white;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;position:relative}
+    .crosshair-style.active{border-color:#facc15;box-shadow:0 0 18px rgba(250,204,21,.45),inset 0 0 22px rgba(250,204,21,.10)}
+    .crosshair-style span{font-size:12px;color:#cbd5e1}
+    .aim{width:42px;height:42px;position:relative;display:block}
+    .aim-classic{border:3px solid #00ff88;border-radius:50%;box-shadow:0 0 14px #00ff88}.aim-classic:before,.aim-classic:after{content:"";position:absolute;background:#00ff88;box-shadow:0 0 10px #00ff88}.aim-classic:before{height:3px;width:100%;left:0;top:50%;transform:translateY(-50%)}.aim-classic:after{width:3px;height:100%;top:0;left:50%;transform:translateX(-50%)}
+    .aim-cross:before,.aim-cross:after{content:"";position:absolute;background:#ff4444;box-shadow:0 0 12px #ff4444;border-radius:8px}.aim-cross:before{width:42px;height:4px;top:19px}.aim-cross:after{height:42px;width:4px;left:19px}
+    .aim-circle{border:4px dashed #22e7ff;border-radius:50%;box-shadow:0 0 14px rgba(34,231,255,.8)}.aim-circle:after{content:"";position:absolute;inset:16px;background:#22e7ff;border-radius:50%;box-shadow:0 0 12px #22e7ff}
+    .aim-x:before,.aim-x:after{content:"";position:absolute;width:48px;height:4px;background:#ffd400;top:20px;left:-3px;border-radius:8px;box-shadow:0 0 12px #ffd400}.aim-x:before{transform:rotate(45deg)}.aim-x:after{transform:rotate(-45deg)}
+    .range-label{display:block;margin:15px 0;color:#fff;font-size:14px;font-weight:800}.range-label span{display:block;margin-bottom:9px}
+    input[type=range]{width:100%;accent-color:#facc15}input[type=color]{width:100%;height:52px;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:#0b1119;padding:6px}
+    .crosshair-preview{height:170px;border-radius:20px;background:radial-gradient(circle at center,rgba(255,255,255,.07),transparent 45%),#080c13;display:grid;place-items:center;margin:18px 0;border:1px solid rgba(255,255,255,.11);position:relative;overflow:hidden;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px),radial-gradient(circle at center,rgba(255,255,255,.07),transparent 45%);background-size:28px 28px,28px 28px,auto}
+    .crosshair-preview:before,.crosshair-preview:after{content:"";position:absolute;background:rgba(255,255,255,.20);pointer-events:none}.crosshair-preview:before{left:50%;top:0;width:1px;height:100%;border-left:1px dashed rgba(255,255,255,.22);background:transparent}.crosshair-preview:after{left:0;top:50%;width:100%;height:1px;border-top:1px dashed rgba(255,255,255,.22);background:transparent}
+    .crosshair-preview .crosshair-dot{position:absolute;left:50%;top:50%;transform:translate(calc(-50% + var(--crosshair-x,0px)),calc(-50% + var(--crosshair-y,0px)))}
+    .crosshair-dot{width:34px;height:34px;position:relative;border:2px solid #00ff88;border-radius:50%;box-shadow:0 0 16px #00ff88}.crosshair-dot:before,.crosshair-dot:after{content:"";position:absolute;background:#00ff88;box-shadow:0 0 12px #00ff88}.crosshair-dot:before{width:100%;height:3px;top:50%;left:0;transform:translateY(-50%)}.crosshair-dot:after{height:100%;width:3px;left:50%;top:0;transform:translateX(-50%)}
+    .crosshair-dot.cross{border:0}.crosshair-dot.circle:before,.crosshair-dot.circle:after,.crosshair-dot.x:before,.crosshair-dot.x:after{display:none}.crosshair-dot.x{border:0;border-radius:0;transform:rotate(45deg)}.crosshair-dot.x:before,.crosshair-dot.x:after{display:block}
+    .crosshair-dot.x{transform:translate(calc(-50% + var(--crosshair-x,0px)),calc(-50% + var(--crosshair-y,0px))) rotate(45deg)}
+    .modal-btn{width:100%;margin-top:10px;border:0;border-radius:16px;padding:15px;color:#fff;font-weight:900;font-size:16px}.success{background:linear-gradient(135deg,#22c55e,#15803d)}.danger{background:linear-gradient(135deg,#ef4444,#991b1b)}
+    .terminal-card pre{min-height:190px;padding:14px;border-radius:18px;background:#020617;color:#86efac;white-space:pre-wrap;font-size:12px;line-height:1.6;border:1px solid rgba(34,197,94,.2)}.done{text-align:center}
+    .toast{position:fixed;left:50%;bottom:92px;z-index:90;transform:translate(-50%,20px);opacity:0;padding:12px 16px;border-radius:999px;background:rgba(18,18,18,.96);color:#e5e7eb;border:1px solid rgba(250,204,21,.20);transition:.25s;white-space:nowrap}.toast.active{opacity:1;transform:translate(-50%,0)}
+    .stats-card{margin:18px 0;padding:18px;border-radius:24px;background:rgba(16,16,16,.86);border:1px solid rgba(250,204,21,.22);box-shadow:0 0 24px rgba(250,204,21,.06),inset 0 0 22px rgba(255,255,255,.025)}
+    .stats-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+    .stats-head h2{margin:4px 0 0;font-size:22px}
+    .refresh-stats{width:42px;height:42px;border:1px solid rgba(250,204,21,.25);border-radius:14px;background:rgba(255,255,255,.05);color:#facc15;font-size:22px;font-weight:900}
+    .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .stat-box{min-height:94px;padding:14px;border-radius:20px;background:rgba(5,5,5,.72);border:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;justify-content:space-between}
+    .stat-icon{font-size:20px;line-height:1}.stat-icon.green{color:#22c55e}.stat-icon.gold{color:#facc15}.stat-icon.orange{color:#fb923c}.stat-icon.blue{color:#38bdf8}
+    .stat-box small{color:#9ca3af;font-weight:800;margin-top:8px}.stat-box b{margin-top:6px;font-size:24px;color:#fff}
+    .stats-note{margin:12px 0 0;color:#9ca3af;font-size:12px;text-align:center}
+    .crosshair-position-control{margin:16px 0 14px;padding:14px;border:1px solid rgba(255,255,255,.09);border-radius:18px;background:rgba(255,255,255,.035)}
+    .crosshair-position-control .setting-title{margin:0 0 8px}
+    .pos-text{margin:0 0 12px;color:#facc15;font-size:13px;font-weight:900;text-align:center}
+    .move-row{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px}
+    .move-row button{height:44px;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(28,28,28,.95);color:white;font-size:24px;font-weight:900}
+    .move-row button:active{transform:scale(.96);filter:brightness(.9)}
+    #crosshairResetPos{color:#facc15}
+    .range-label.compact{margin:10px 0 0}.range-label.compact span{font-size:13px;color:#d1d5db}
+    .crosshair-position-control .modal-btn{background:linear-gradient(135deg,#facc15,#f97316)!important;color:#111827!important;border:1px solid rgba(250,204,21,.9)!important;font-weight:900!important;box-shadow:0 0 14px rgba(250,204,21,.35)!important}
+    .crosshair-position-control #crosshairResetPos{background:linear-gradient(135deg,#22c55e,#16a34a)!important;color:white!important;border:1px solid rgba(34,197,94,.9)!important;box-shadow:0 0 14px rgba(34,197,94,.35)!important}
+    .logout-btn{margin-top:14px;background:linear-gradient(135deg,#ef4444,#991b1b)!important;color:#fff!important;font-weight:950!important;text-align:center!important;justify-content:center!important}
+    .logout-card .modal-title{margin-bottom:18px}.logout-card .modal-title p{font-size:14px;color:#cbd5e1}
+    .cancel-btn{background:#2b2b2b!important;color:#fff!important}
+    .menu-icon.teal{color:#2dd4bf;text-shadow:0 0 12px rgba(45,212,191,.40)}
+    .sensitivity-card{width:min(520px,96vw);max-height:88vh;overflow:auto;padding-bottom:24px}
+    .sensitivity-title span{color:#facc15;text-shadow:0 0 16px rgba(250,204,21,.55)}
+    .sensitivity-picked{margin:18px 0 4px;padding:16px;border-radius:20px;border:1px solid rgba(250,204,21,.25);background:linear-gradient(135deg,rgba(250,204,21,.09),rgba(4,12,24,.70));display:flex;align-items:center;justify-content:space-between;gap:14px}
+    .sensitivity-picked small{display:block;color:#9ca3af;font-size:12px;font-weight:800;margin-bottom:5px}.sensitivity-picked b{display:block;color:#fff;font-size:18px}.sensitivity-picked p{margin:5px 0 0;color:#a7f3d0;font-size:12px}.sensitivity-picked>span{flex:none;padding:10px 12px;border-radius:14px;background:rgba(250,204,21,.12);border:1px solid rgba(250,204,21,.28);color:#facc15;font-weight:950;font-size:22px}
+    .sensitivity-brand-grid{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}.sensitivity-brand-grid::-webkit-scrollbar{display:none}
+    .sensitivity-chip,.sensitivity-preset{border:1px solid rgba(255,255,255,.12);border-radius:13px;background:rgba(255,255,255,.055);color:#fff;font-weight:900;padding:12px 14px;white-space:nowrap}.sensitivity-chip.active,.sensitivity-preset.active{background:linear-gradient(135deg,#ffe55a,#f4b400);color:#080808;border-color:#facc15;box-shadow:0 0 14px rgba(250,204,21,.28)}
+    .sensitivity-search{width:100%;height:48px;border-radius:16px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.055);color:#fff;outline:none;padding:0 15px;font-weight:800;font-size:15px;margin-bottom:10px}.sensitivity-search::placeholder{color:rgba(255,255,255,.45)}
+    .sensitivity-model-list{max-height:270px;overflow:auto;border:1px solid rgba(255,255,255,.10);border-radius:18px;background:rgba(5,5,5,.45)}
+    .sensitivity-model{width:100%;min-height:48px;border:0;border-bottom:1px solid rgba(255,255,255,.07);background:transparent;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 14px;text-align:left}.sensitivity-model:last-child{border-bottom:0}.sensitivity-model span{font-size:15px;font-weight:850}.sensitivity-model small{color:#38bdf8;font-size:12px;font-weight:800}.sensitivity-model.active{background:rgba(250,204,21,.10);color:#facc15}.sensitivity-model.active small{color:#86efac}.sensitivity-empty{padding:16px;color:#9ca3af;text-align:center}
+    .sensitivity-preset-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.sensitivity-preset{min-height:44px;padding:10px 8px;font-size:12px}
+    .sensitivity-values{border:1px solid rgba(255,255,255,.10);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.045)}
+    .sensitivity-value-row{min-height:58px;display:grid;grid-template-columns:105px 42px 1fr;align-items:center;gap:10px;padding:0 14px;border-bottom:1px solid rgba(255,255,255,.07)}.sensitivity-value-row:last-child{border-bottom:0}.sensitivity-value-row span{font-size:14px;color:#f5f5f5}.sensitivity-value-row b{font-size:19px;color:#fff;text-align:right}.sensitivity-value-row input{accent-color:#facc15;opacity:1}.sensitivity-value-row input:disabled{filter:none;cursor:default}.sensitivity-note{margin:14px 0 0;padding:14px;border-radius:16px;border:1px solid rgba(34,197,94,.25);background:rgba(34,197,94,.10);color:#bbf7d0;font-size:13px;line-height:1.45}
+    .tab-page{padding:16px 0 110px;animation:tabFade .18s ease}.tab-page.hidden{display:none!important}
+    @keyframes tabFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    .tab-card{width:100%;border-radius:24px;padding:18px;background:linear-gradient(180deg,rgba(23,23,23,.95),rgba(10,10,10,.95));border:1px solid rgba(255,255,255,.09);box-shadow:0 18px 42px rgba(0,0,0,.46),inset 0 0 22px rgba(255,255,255,.02)}
+    .tab-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+    .tab-card h2{margin:4px 0 0;color:#fff;font-size:24px;font-weight:950;letter-spacing:.2px}
+    .tab-sub{margin:7px 0 16px;color:#9ca3af;font-size:14px;line-height:1.45}
+    .mini-action{width:42px;height:42px;border:1px solid rgba(250,204,21,.25);border-radius:14px;background:rgba(255,255,255,.05);color:#facc15;font-size:22px;font-weight:950;cursor:pointer}
+    .history-list{display:flex;flex-direction:column;gap:10px;max-height:55vh;overflow:auto;padding-right:2px}
+    .history-empty{padding:18px;border-radius:18px;color:#9ca3af;text-align:center;background:rgba(255,255,255,.045);border:1px dashed rgba(255,255,255,.10)}
+    .history-item{padding:14px;border-radius:17px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.07);display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:center}
+    .history-item .history-dot{width:34px;height:34px;border-radius:13px;display:grid;place-items:center;background:rgba(250,204,21,.11);color:#facc15;font-size:16px;font-weight:950}
+    .history-item b{display:block;color:#fff;font-size:15px;line-height:1.25}
+    .history-item small{display:block;margin-top:4px;color:#9ca3af;font-size:12px;line-height:1.25}
+    .danger-soft{margin-top:14px;background:rgba(239,68,68,.14)!important;color:#ff8b8b!important;border:1px solid rgba(239,68,68,.26)!important}
+    .setting-row{width:100%;min-height:74px;margin-bottom:12px;padding:14px;border:0;border-radius:19px;background:rgba(255,255,255,.055);color:#fff;display:grid;grid-template-columns:40px 1fr 54px;align-items:center;gap:11px;text-align:left;cursor:pointer;border:1px solid rgba(255,255,255,.07)}
+    .setting-row:active{transform:scale(.985)}.setting-row span{font-size:24px;text-align:center}.setting-row b{display:block;font-size:16px;font-weight:950}.setting-row small{display:block;margin-top:4px;color:#9ca3af;font-size:12px;line-height:1.35}.setting-row em{color:#9ca3af;font-size:32px;font-style:normal;text-align:right}
+    .setting-switch{width:50px;height:30px;border-radius:999px;background:#343434;position:relative;transition:.22s ease;justify-self:end}
+    .setting-switch:before{content:"";position:absolute;width:24px;height:24px;top:3px;left:3px;border-radius:50%;background:#f5f5f5;transition:.22s ease;box-shadow:0 2px 7px rgba(0,0,0,.35)}
+    .setting-row.active .setting-switch{background:linear-gradient(135deg,#ffe55a,#f4b400)}.setting-row.active .setting-switch:before{left:23px;background:#111827}
+    .logout-setting{border-color:rgba(239,68,68,.18);background:rgba(239,68,68,.08)}.logout-setting span,.logout-setting b{color:#ffb4b4}
+    body.compact-mode .menu-row{min-height:72px;padding:11px 14px;border-radius:18px}
+    body.compact-mode .simple-menu{gap:10px}
+    body.compact-mode .hero-card,body.compact-mode .stats-card,body.compact-mode .security-box{margin-top:12px;margin-bottom:12px}
+    .history-summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 14px}
+    .history-summary-box{min-height:70px;border-radius:17px;padding:12px 13px;background:rgba(250,204,21,.075);border:1px solid rgba(250,204,21,.18);display:flex;flex-direction:column;justify-content:center}
+    .history-summary-box.wide{grid-column:1/-1;min-height:62px}
+    .history-summary-box small{color:#9ca3af;font-size:12px;font-weight:850}
+    .history-summary-box b{margin-top:5px;color:#fff;font-size:22px;font-weight:950;line-height:1.1}
+    .history-summary-box.wide b{font-size:16px;color:#facc15}
+    .history-toolbar{display:grid;grid-template-columns:1fr 92px;gap:9px;margin:0 0 10px}
+    .history-search{height:46px;display:grid;grid-template-columns:34px 1fr;align-items:center;border-radius:16px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.045);overflow:hidden}
+    .history-search span{color:#facc15;text-align:center;font-size:20px;font-weight:950}
+    .history-search input{width:100%;height:100%;border:0;outline:0;background:transparent;color:#fff;font-size:14px}
+    .history-search input::placeholder{color:rgba(255,255,255,.42)}
+    .history-copy-btn{height:46px;border:1px solid rgba(250,204,21,.20);border-radius:16px;background:rgba(250,204,21,.10);color:#facc15;font-size:13px;font-weight:950;cursor:pointer}
+    .history-filter{display:flex;gap:8px;overflow-x:auto;padding:0 0 10px;scrollbar-width:none}
+    .history-filter::-webkit-scrollbar{display:none}
+    .history-filter button{flex:0 0 auto;height:36px;padding:0 13px;border-radius:999px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.045);color:#aeb6c2;font-size:12px;font-weight:900;cursor:pointer}
+    .history-filter button.active{background:linear-gradient(135deg,#ffe55a,#f4b400);color:#101010;border-color:rgba(250,204,21,.8)}
+    .history-day{margin:8px 0 2px;padding:0 4px;color:#facc15;font-size:12px;font-weight:950;letter-spacing:.35px;text-transform:uppercase}
+    .history-item{grid-template-columns:44px 1fr!important;position:relative;transition:.18s ease}
+    .history-item:active{transform:scale(.985)}
+    .history-item .history-dot{width:38px!important;height:38px!important;border-radius:14px!important}
+    .history-info{min-width:0}
+    .history-info b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .history-meta{display:flex;align-items:center;gap:7px;margin-top:5px;color:#9ca3af;font-size:12px;flex-wrap:wrap}
+    .history-tag{padding:3px 8px;border-radius:999px;background:rgba(250,204,21,.10);color:#facc15;border:1px solid rgba(250,204,21,.16);font-size:11px;font-weight:900}
+    .history-count{min-width:26px;height:26px;padding:0 7px;border-radius:999px;display:grid;place-items:center;background:rgba(250,204,21,.12);color:#facc15;border:1px solid rgba(250,204,21,.18);font-size:12px;font-weight:950}
+    .history-empty strong{display:block;color:#fff;margin-bottom:5px;font-size:16px}
+    .history-empty span{display:block;color:#9ca3af;font-size:13px;line-height:1.45}
+    .menu-icon.yellow{color:#facc15;text-shadow:0 0 14px rgba(250,204,21,.55)}
+    .speed-card{overflow:hidden}
+    .speed-status{margin:18px 0 16px;padding:16px;border-radius:20px;background:rgba(250,204,21,.08);border:1px solid rgba(250,204,21,.22);display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .speed-status small{display:block;color:#9ca3af;font-size:12px;font-weight:800}
+    .speed-status b{display:block;margin-top:5px;color:#fff;font-size:20px;font-weight:950}
+    .speed-status span{min-width:62px;height:34px;border-radius:999px;background:rgba(239,68,68,.18);color:#ff8a8a;display:grid;place-items:center;font-size:13px;font-weight:950;border:1px solid rgba(239,68,68,.28)}
+    .speed-status.active span{background:rgba(34,197,94,.18);color:#86efac;border-color:rgba(34,197,94,.35)}
+    .speed-level-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .speed-level{min-height:88px;border:1px solid rgba(255,255,255,.10);border-radius:18px;background:rgba(255,255,255,.045);color:#fff;padding:12px 8px;cursor:pointer}
+    .speed-level b{display:block;font-size:17px;font-weight:950}
+    .speed-level small{display:block;margin-top:5px;color:#9ca3af;font-size:11px;line-height:1.35}
+    .speed-level.active{border-color:#facc15;background:rgba(250,204,21,.12);box-shadow:0 0 18px rgba(250,204,21,.22)}
+    .speed-meter{width:100%;height:12px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;margin:10px 0 18px}
+    .speed-meter div{width:60%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#22c55e,#facc15,#f97316);transition:width .2s ease}
+    body.speed-mode .menu-row,body.speed-mode .stat-box,body.speed-mode .hero-card,body.speed-mode .stats-card,body.speed-mode .security-box,body.speed-mode .tab-card,body.speed-mode .setting-row,body.speed-mode .bottom-nav button{transition-duration:var(--speed-duration,.08s)!important}
+    body.speed-mode .menu-row:active,body.speed-mode .bottom-nav button:active,body.speed-mode .speed-level:active,body.speed-mode .setting-row:active{transform:scale(.975)}
+    .info-panel{pointer-events:auto}.info-item{pointer-events:auto;position:relative;z-index:10000}
+    .gate{display:block;padding:10px 12px 18px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+    .gate-card{width:min(390px,94vw);margin:8px auto 20px;padding:18px 18px 20px;border-radius:26px;box-shadow:0 20px 52px rgba(0,0,0,.56)}
+    .brand-logo{margin:0 0 9px}.brand-logo img{width:145px;height:145px;border-radius:18px;filter:drop-shadow(0 0 17px rgba(255,211,0,.28))}
+    .secure-text{margin-top:2px;font-size:12px;letter-spacing:.5px}
+    .gate h1{margin:10px 0 0;font-size:29px;letter-spacing:.65px;line-height:1.02}
+    .byline{margin:6px 0 16px;font-size:12px;letter-spacing:.8px}
+    .login-form label{margin:0 0 7px;font-size:13px}
+    .input-row{height:54px;grid-template-columns:32px 1fr 44px;gap:5px;border-radius:17px;padding:0 8px}
+    .input-icon{font-size:18px}.input-row input{font-size:16px}.input-row button{width:38px;height:38px;border-radius:13px;font-size:16px}
+    .message{min-height:19px;margin:8px 0 0;font-size:13px}
+    .primary-btn{height:53px;margin-top:12px;border-radius:17px;font-size:17px;box-shadow:0 11px 26px rgba(255,214,10,.23)}
+    .or-line{margin:14px 0;gap:9px;font-size:13px}
+    .gate-actions{gap:8px}.gate-actions button{min-height:47px;border-radius:15px;padding:0 14px;font-size:14px;gap:10px}
+    .safe-note{margin-top:15px;gap:9px}.safe-note span{font-size:20px}.safe-note b{font-size:13px}.safe-note small{margin-top:2px;font-size:11px}
+    .app{max-width:460px;padding:10px 12px 76px}
+    .topbar{height:55px;grid-template-columns:42px 1fr 74px;gap:7px}
+    .menu-btn{width:38px;height:38px;padding:7px}.menu-btn span{width:22px;height:2px}
+    .title-block h2{font-size:19px;letter-spacing:.55px}.title-block p{margin-top:2px;font-size:10px}
+    .online-badge{height:32px;border-radius:11px;gap:5px;font-size:11px}.online-badge i{width:7px;height:7px}
+    .hero-card{gap:11px;margin:9px 0 10px;padding:11px;border-radius:17px}
+    .hero-logo{width:62px;height:62px;border-radius:14px}
+    .hero-card h1{margin:2px 0;font-size:18px}.small{font-size:10px}.license{font-size:11px;line-height:1.3}
+    .stats-card{margin:10px 0;padding:12px;border-radius:18px}
+    .stats-head{gap:8px;margin-bottom:9px}.stats-head h2{margin:2px 0 0;font-size:17px}
+    .refresh-stats{width:35px;height:35px;border-radius:11px;font-size:18px}
+    .stats-grid{gap:8px}.stat-box{min-height:62px;padding:9px;border-radius:14px}
+    .stat-box small{font-size:10px}.stat-box b{font-size:16px}.stat-icon{font-size:15px}
+    .stats-note{margin:9px 0 0;font-size:10px}
+    .simple-menu{gap:8px;margin-top:9px}
+    .menu-row{min-height:64px;border-radius:16px;padding:9px 10px;grid-template-columns:40px 1fr 44px;gap:9px}
+    .menu-row b{font-size:15px}.menu-row small{margin-top:2px;font-size:10.5px;line-height:1.25}
+    .menu-icon{width:36px;height:36px;border-radius:11px;font-size:21px}
+    .switch{width:43px;height:25px}.switch:before{width:19px;height:19px;top:3px;left:3px}
+    .menu-row.active .switch:before{left:21px}
+    .arrow{font-size:28px}
+    .security-box{margin:11px 0 0;padding:11px;border-radius:16px;gap:9px}
+    .security-box span{font-size:24px}.security-box b{font-size:13px}.security-box small{margin-top:2px;font-size:10px}
+    .shield-fade{right:11px;font-size:42px!important}
+    .tab-card{padding:13px;border-radius:18px}
+    .tab-head h2{font-size:18px}
+    .tab-sub{font-size:11px;line-height:1.35;margin:7px 0 11px}
+    .setting-row{min-height:60px;padding:10px 11px;border-radius:15px;gap:9px}
+    .setting-row>span{font-size:20px}.setting-row b{font-size:13px}.setting-row small{font-size:10px;margin-top:2px}
+    .setting-switch{transform:scale(.9);transform-origin:right center}
+    .history-summary-grid{gap:7px}.history-summary-box{padding:9px;border-radius:13px}
+    .history-summary-box small{font-size:9.5px}.history-summary-box b{font-size:14px}
+    .history-toolbar{gap:7px}.history-search{min-height:42px;border-radius:13px}.history-search input{font-size:12px}
+    .history-copy-btn,.mini-action{min-height:38px;border-radius:12px;font-size:11px}
+    .history-filter{gap:6px;margin:9px 0}.history-filter button{padding:7px 9px;border-radius:10px;font-size:10px}
+    .history-item{padding:9px;border-radius:13px}
+    .bottom-nav{bottom:7px;width:min(450px,94vw);height:57px;border-radius:18px}
+    .bottom-nav button{font-size:18px;gap:1px}.bottom-nav span{font-size:10px}
+    .info-panel{width:min(330px,88vw);padding:13px}
+    .info-head h2{font-size:18px}.info-head button{padding:8px 11px;border-radius:11px;font-size:11px}
+    .info-item{margin:9px 0;padding:11px;border-radius:15px}
+    .info-item strong{font-size:12px}.info-item p{margin-top:2px;font-size:10.5px}.info-item span{font-size:18px}
+    .full-btn{border-radius:14px;padding:11px 14px;font-size:12px}
+    .copyright{margin-top:15px;font-size:11px}
+    .modal{padding:10px}.modal-card{width:min(360px,94vw);border-radius:20px;padding:16px}
+    .close{right:9px;top:8px;width:32px;height:32px;font-size:20px}
+    .modal-title{gap:8px}.modal-title span{font-size:22px}.modal-title h3{font-size:20px}.modal-title p{font-size:10px}
+    .setting-title{margin:15px 0 8px;font-size:12px}
+    .speed-level-grid{gap:7px}.speed-level{min-height:55px;border-radius:13px;padding:8px}
+    .speed-level b{font-size:12px}.speed-level small{font-size:9px}
+    .speed-status{padding:10px;border-radius:14px}.speed-meter{height:8px}
+    .crosshair-style-grid{gap:7px;margin:8px 0 12px}.crosshair-style{height:78px;border-radius:13px;gap:6px}
+    .crosshair-preview{height:125px;margin:12px 0;border-radius:15px}
+    .range-label{margin:10px 0;font-size:11px}
+    .modal-btn{margin-top:7px;border-radius:13px;padding:11px;font-size:12px}
+    .terminal-card pre{min-height:135px;padding:10px;border-radius:13px;font-size:10px;line-height:1.45}
+    .toast{bottom:68px;padding:9px 12px;font-size:11px}
+    @media(max-width:430px){.gate-card{width:min(370px,94vw);padding:15px 15px 17px;margin-top:6px}.brand-logo img{width:128px;height:128px}.gate h1{font-size:26px}.byline{margin-bottom:13px}.input-row{height:51px}.primary-btn{height:50px;font-size:16px}.gate-actions button{min-height:44px;font-size:13px}.safe-note{margin-top:12px}}
+    @media(max-height:720px){.gate-card{margin-top:3px;padding-top:13px;padding-bottom:15px}.brand-logo img{width:108px;height:108px}.secure-text{font-size:10.5px}.gate h1{font-size:24px;margin-top:7px}.byline{margin:4px 0 10px;font-size:10.5px}.login-form label{font-size:11.5px}.input-row{height:47px}.message{font-size:11.5px;margin-top:6px}.primary-btn{height:47px;margin-top:9px;font-size:15px}.or-line{margin:10px 0;font-size:11px}.gate-actions{gap:6px}.gate-actions button{min-height:40px;font-size:12px}.safe-note{margin-top:9px}}
+    @media(max-width:390px){.gate-card{padding:22px 22px}.brand-logo img{width:190px;height:190px}.gate h1{font-size:31px}.menu-row{min-height:78px}.menu-row b{font-size:18px}.menu-row small{font-size:13px}.hero-logo{width:84px;height:84px}.crosshair-style-grid{grid-template-columns:repeat(2,1fr)}.stats-card{padding:15px}.stat-box{min-height:84px}.stat-box b{font-size:21px}.speed-level-grid{grid-template-columns:1fr}.speed-level{min-height:70px}.sensitivity-card{padding:18px}.sensitivity-preset-grid{grid-template-columns:repeat(2,1fr)}.sensitivity-value-row{grid-template-columns:92px 36px 1fr;padding:0 10px}.sensitivity-value-row span{font-size:13px}.sensitivity-picked b{font-size:16px}.tab-card{padding:15px}.setting-row{min-height:68px;grid-template-columns:36px 1fr 50px}.history-list{max-height:52vh}.history-toolbar{grid-template-columns:1fr 82px}.history-copy-btn{font-size:12px}.history-summary-box b{font-size:20px}.history-list{max-height:44vh!important}.history-item{grid-template-columns:34px 1fr auto!important;padding:12px!important}.history-item .history-dot{width:34px!important;height:34px!important}.move-row{gap:6px}.move-row button{height:40px;font-size:21px}.crosshair-position-control{padding:12px}}
+  </style>
+</head>
+<body>
+  <div class="bg-glow bg-gold"></div>
+  <div class="bg-glow bg-blue"></div>
+
+  <section class="gate" id="passwordScreen">
+    <div class="gate-card">
+      <div class="brand-logo">
+        <img src="https://nguyennhatminh241224-sys.github.io/Headlock-Jame/logo.png" alt="Headlock Jame" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>'">
+      </div>
+
+      <div class="secure-text">SECURE ACCESS</div>
+      <h1>HEADLOCK <span>JAME</span></h1>
+      <p class="byline">BY JAME FF</p>
+
+      <form id="passwordForm" class="login-form">
+        <label for="passwordInput">Nhập mật khẩu hoặc Key Mua</label>
+
+        <div class="input-row">
+          <span class="input-icon">🔒</span>
+          <input id="passwordInput" type="password" placeholder="Password / Key" autocomplete="off" required />
+          <button id="togglePassword" type="button">👁</button>
+        </div>
+
+        <div id="passwordError" class="message">Zalo hỗ trợ: 0333635135</div>
+
+        <button class="primary-btn" type="submit">⚡ Kích Hoạt Jame</button>
+      </form>
+
+      <div class="or-line"><span>HOẶC</span></div>
+
+      <div class="gate-actions">
+        <button id="getKeyBtn" type="button"><span>🔑</span> Nhận Key Miễn Phí</button>
+        <button id="contactBtn" type="button"><span>💬</span> Liên hệ mua key</button>
+        <button id="logoutBtn" class="hidden" type="button">Đăng xuất</button>
+      </div>
+
+      <div class="safe-note">
+        <span>🛡</span>
+        <div>
+          <b>Bảo mật tuyệt đối</b>
+          <small>Dữ liệu của bạn luôn được bảo vệ</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main id="mainApp" class="app locked">
+    <header class="topbar">
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="title-block">
+        <h2>HEADLOCK <span>JAME</span></h2>
+        <p>BY JAME FF</p>
+      </div>
+
+      <div class="online-badge"><i></i> Online</div>
+    </header>
+
+    <section class="hero-card">
+      <div class="hero-logo">
+        <img src="https://nguyennhatminh241224-sys.github.io/Headlock-Jame/logo.png" alt="Headlock Jame" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>'">
+      </div>
+
+      <div class="hero-info">
+        <p class="small">PREMIUM PANEL</p>
+        <h1>Headlock Jame</h1>
+        <p class="license" id="licenseText">Đã mở khóa</p>
+      </div>
+    </section>
+
+    <section class="stats-card" id="statsCard">
+      <div class="stats-head">
+        <div>
+          <p class="small">LIVE DASHBOARD</p>
+          <h2>Thống kê hệ thống</h2>
+        </div>
+        <button class="refresh-stats" id="refreshStatsBtn" type="button">↻</button>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-box"><span class="stat-icon green">●</span><small>Online</small><b id="statOnline">--</b></div>
+        <div class="stat-box"><span class="stat-icon gold">🔑</span><small>Key Active</small><b id="statActiveKeys">--</b></div>
+        <div class="stat-box"><span class="stat-icon orange">🔥</span><small>Hôm nay</small><b id="statToday">--</b></div>
+        <div class="stat-box"><span class="stat-icon blue">☁</span><small>Firebase</small><b id="statServer">--</b></div>
+      </div>
+
+      <p class="stats-note" id="statUpdated">Đang đồng bộ...</p>
+    </section>
+
+    <section class="simple-menu">
+      <button class="menu-row" type="button" data-feature="boost"><span class="menu-icon red">🎯</span><span><b>Boost RAM</b><small>Tối ưu hiệu suất</small></span><span class="switch"></span></button>
+      <button class="menu-row" type="button" data-feature="speed" id="speedMenuBtn"><span class="menu-icon yellow">⚡</span><span><b>SPEED</b><small>Tăng tốc phản hồi - tối ưu chuyển động app</small></span><span class="switch"></span></button>
+      <button class="menu-row" type="button" data-feature="crosshair"><span class="menu-icon blue">◎</span><span><b>Crosshair</b><small>Tùy chỉnh tâm ngắm</small></span><span class="switch"></span></button>
+      <button class="menu-row" type="button" data-feature="aimbody"><span class="menu-icon purple">♙</span><span><b>AIMBODY</b><small>Hỗ trợ chế độ ngắm</small></span><span class="switch"></span></button>
+      <button class="menu-row" type="button" data-feature="lightaim"><span class="menu-icon orange">✦</span><span><b>NHẸ TÂM</b><small>Giảm giật - giữ ổn định</small></span><span class="switch"></span></button>
+      <button class="menu-row" type="button" data-feature="sensitivity"><span class="menu-icon teal">⌾</span><span><b>Độ nhạy OB54</b><small>Lấy độ nhạy cho mọi dòng máy</small></span><span class="arrow">›</span></button>
+      <button class="menu-row" type="button" data-feature="info"><span class="menu-icon gray">ⓘ</span><span><b>Thông Tin</b><small>Hướng dẫn sử dụng</small></span><span class="arrow">›</span></button>
+    </section>
+
+    <section class="security-box">
+      <span>🛡</span><div><b>HỆ THỐNG AN TOÀN</b><small>Cam kết bảo mật - Không thu thập dữ liệu</small></div><span class="shield-fade">✓</span>
+    </section>
+
+    <section class="tab-page hidden" id="historyPage">
+      <div class="tab-card">
+        <div class="tab-head">
+          <div>
+            <p class="small">ACTIVITY LOG</p>
+            <h2>◴ Lịch sử</h2>
+          </div>
+          <button class="mini-action" id="refreshHistoryBtn" type="button">↻</button>
+        </div>
+
+        <p class="tab-sub">Lưu lại thao tác gần đây, có tìm kiếm, lọc nhanh và thống kê trong ngày.</p>
+
+        <div class="history-summary-grid">
+          <div class="history-summary-box"><small>Tổng thao tác</small><b id="historyTotalCount">0</b></div>
+          <div class="history-summary-box"><small>Hôm nay</small><b id="historyTodayCount">0</b></div>
+          <div class="history-summary-box wide"><small>Gần nhất</small><b id="historyLatestTime">Chưa có</b></div>
+        </div>
+
+        <div class="history-toolbar">
+          <label class="history-search" for="historySearchInput">
+            <span>⌕</span>
+            <input id="historySearchInput" type="search" placeholder="Tìm trong lịch sử..." autocomplete="off">
+          </label>
+          <button class="history-copy-btn" id="historyExportBtn" type="button">Sao chép</button>
+        </div>
+
+        <div class="history-filter" id="historyFilterBar">
+          <button class="active" type="button" data-history-filter="all">Tất cả</button>
+          <button type="button" data-history-filter="feature">Tính năng</button>
+          <button type="button" data-history-filter="toggle">Bật/Tắt</button>
+          <button type="button" data-history-filter="settings">Cài đặt</button>
+          <button type="button" data-history-filter="system">Hệ thống</button>
+        </div>
+
+        <div id="historyList" class="history-list">
+          <div class="history-empty">Chưa có lịch sử hoạt động.</div>
+        </div>
+
+        <button class="full-btn danger-soft" id="clearHistoryBtn" type="button">
+          Xóa lịch sử
+        </button>
+      </div>
+    </section>
+
+    <section class="tab-page hidden" id="settingsPage">
+      <div class="tab-card">
+        <div class="tab-head">
+          <div>
+            <p class="small">APP CONTROL</p>
+            <h2>⚙ Cài đặt</h2>
+          </div>
+        </div>
+
+        <p class="tab-sub">Tùy chỉnh nhanh giao diện và thao tác trong ứng dụng.</p>
+
+        <button class="setting-row" type="button" data-setting="sound">
+          <span>🔊</span>
+          <div>
+            <b>Âm thanh thông báo</b>
+            <small>Bật / tắt âm báo khi thao tác</small>
+          </div>
+          <i class="setting-switch"></i>
+        </button>
+
+        <button class="setting-row" type="button" data-setting="vibrate">
+          <span>📳</span>
+          <div>
+            <b>Rung khi bấm</b>
+            <small>Phản hồi rung nhẹ trên thiết bị hỗ trợ</small>
+          </div>
+          <i class="setting-switch"></i>
+        </button>
+
+        <button class="setting-row" type="button" data-setting="saveTab">
+          <span>💾</span>
+          <div>
+            <b>Lưu tab đang mở</b>
+            <small>Mở lại đúng tab lần trước</small>
+          </div>
+          <i class="setting-switch"></i>
+        </button>
+
+        <button class="setting-row" type="button" data-setting="compactMode">
+          <span>✨</span>
+          <div>
+            <b>Chế độ gọn</b>
+            <small>Giảm khoảng cách để xem được nhiều nội dung hơn</small>
+          </div>
+          <i class="setting-switch"></i>
+        </button>
+
+        <button class="setting-row" type="button" data-setting="speedDefault" id="speedDefaultSetting">
+          <span>⚡</span>
+          <div>
+            <b>SPEED mặc định</b>
+            <small>Tự giữ trạng thái SPEED khi mở lại app</small>
+          </div>
+          <i class="setting-switch"></i>
+        </button>
+
+        <button class="setting-row logout-setting" id="settingsLogoutBtn" type="button">
+          <span>🚪</span>
+          <div>
+            <b>Đăng xuất</b>
+            <small>Thoát khỏi ứng dụng hiện tại</small>
+          </div>
+          <em>›</em>
+        </button>
+      </div>
+    </section>
+
+    <nav class="bottom-nav" id="bottomNav">
+      <button class="active" type="button" data-tab="home" aria-label="Trang chủ">
+        ⌂<span>Trang chủ</span>
+      </button>
+      <button type="button" data-tab="history" aria-label="Lịch sử">
+        ◴<span>Lịch sử</span>
+      </button>
+      <button type="button" data-tab="settings" aria-label="Cài đặt">
+        ⚙<span>Cài đặt</span>
+      </button>
+    </nav>
+  </main>
+
+  <aside class="info-panel" id="infoPanel">
+    <div class="info-head">
+      <h2>Thông Tin</h2>
+      <button id="closeInfo" type="button">Done</button>
+    </div>
+
+    <a class="info-item" href="https://zalo.me/0333635135" target="_blank" rel="noopener">
+      <div>
+        <strong>Mua KEY Liên Hệ Jame FF</strong>
+        <p>Zalo 0333635135</p>
+      </div>
+      <span>☎</span>
+    </a>
+
+    <a class="info-item" href="https://www.facebook.com/" target="_blank" rel="noopener">
+      <div>
+        <strong>FaceBook</strong>
+        <p>Jame FF</p>
+      </div>
+      <span>f</span>
+    </a>
+
+    <a class="info-item" href="https://www.tiktok.com/@jame.ff.11" target="_blank" rel="noopener">
+      <div>
+        <strong>TikTok</strong>
+        <p>https://www.tiktok.com/@jame.ff.11</p>
+      </div>
+      <span>♪</span>
+    </a>
+
+    <button class="full-btn" id="infoGetKeyBtn" type="button">
+      Get Key Free
+    </button>
+
+    <button class="full-btn logout-btn" id="appLogoutBtn" type="button">
+      🚪 Đăng xuất App
+    </button>
+
+    <div class="copyright">
+      <strong>Copyright belongs to Jame FF</strong>
+      <p>Thank For Using</p>
+    </div>
+  </aside>
+
+  <section class="modal hidden" id="boostModal" aria-hidden="true">
+    <div class="modal-card terminal-card">
+      <button class="close" type="button" data-close>×</button>
+      <h3>🚀 Tối ưu máy</h3>
+      <pre id="terminal"></pre>
+      <div class="done hidden" id="boostDone"><strong>✓ BOST RAM thành công!</strong><button class="modal-btn success" type="button" data-close>Đóng</button></div>
+    </div>
+  </section>
+
+  <section class="modal hidden" id="speedModal" aria-hidden="true">
+    <div class="modal-card speed-card">
+      <button class="close" type="button" id="speedClose">×</button>
+
+      <div class="modal-title">
+        <span>⚡</span>
+        <div>
+          <h3>SPEED</h3>
+          <p>Tối ưu độ mượt và phản hồi giao diện trong app</p>
+        </div>
+      </div>
+
+      <div class="speed-status" id="speedStatusBox">
+        <div>
+          <small>Trạng thái hiện tại</small>
+          <b id="speedStatusText">Đang tắt</b>
+        </div>
+        <span id="speedStatusIcon">OFF</span>
+      </div>
+
+      <h4 class="setting-title">Chọn mức SPEED</h4>
+      <div class="speed-level-grid">
+        <button class="speed-level active" type="button" data-speed-level="smooth"><b>Êm</b><small>Mượt và ổn định</small></button>
+        <button class="speed-level" type="button" data-speed-level="fast"><b>Nhanh</b><small>Phản hồi nhanh hơn</small></button>
+        <button class="speed-level" type="button" data-speed-level="max"><b>Max</b><small>Ưu tiên tốc độ</small></button>
+      </div>
+
+      <label class="range-label"><span>Cường độ SPEED</span><input id="speedRange" type="range" min="1" max="100" value="60"></label>
+      <div class="speed-meter"><div id="speedMeterFill"></div></div>
+
+      <button class="modal-btn success" id="speedOnBtn" type="button">Bật SPEED</button>
+      <button class="modal-btn danger" id="speedOffBtn" type="button">Tắt SPEED</button>
+      <p class="license">SPEED chỉ tối ưu hiệu ứng và phản hồi giao diện trong app.</p>
+    </div>
+  </section>
+
+  <section class="modal hidden" id="crosshairModal" aria-hidden="true">
+    <div class="modal-card crosshair-card">
+      <button class="close" type="button" data-close>×</button>
+      <div class="modal-title">
+        <span>⊕</span>
+        <div><h3>Tâm ảo</h3><p>Giữ nguyên chỉnh tâm, màu, size và kiểu tâm</p></div>
+      </div>
+
+      <h4 class="setting-title">Kiểu tâm</h4>
+      <div class="crosshair-style-grid">
+        <button class="crosshair-style active" data-style="classic" type="button"><i class="aim aim-classic"></i><span>Classic</span></button>
+        <button class="crosshair-style" data-style="cross" type="button"><i class="aim aim-cross"></i><span>Cross</span></button>
+        <button class="crosshair-style" data-style="circle" type="button"><i class="aim aim-circle"></i><span>Dot Circle</span></button>
+        <button class="crosshair-style" data-style="x" type="button"><i class="aim aim-x"></i><span>X Mark</span></button>
+      </div>
+
+      <label class="range-label"><span>Kích thước</span><input id="crosshairSize" type="range" min="12" max="80" value="34"></label>
+      <label class="range-label"><span>Màu tâm</span><input id="crosshairColor" type="color" value="#00ff88"></label>
+
+      <div class="crosshair-position-control">
+        <h4 class="setting-title">Vị trí tâm ảo</h4>
+        <p id="crosshairPosText" class="pos-text">X: 0 | Y: 0</p>
+
+        <div class="move-row">
+          <button id="crosshairMoveUp" type="button">↑</button>
+          <button id="crosshairMoveDown" type="button">↓</button>
+          <button id="crosshairMoveLeft" type="button">←</button>
+          <button id="crosshairMoveRight" type="button">→</button>
+          <button id="crosshairResetPos" type="button">⌖</button>
+        </div>
+
+        <label class="range-label compact"><span>Trái / Phải</span><input id="crosshairPosX" type="range" min="-300" max="300" value="0"></label>
+        <label class="range-label compact"><span>Lên / Xuống</span><input id="crosshairPosY" type="range" min="-300" max="300" value="0"></label>
+      </div>
+
+      <div class="crosshair-preview"><div id="crosshairDot" class="crosshair-dot classic"></div></div>
+      <button class="modal-btn success" id="crosshairOnBtn" type="button">Bật tâm ảo</button>
+      <button class="modal-btn danger" id="crosshairOffBtn" type="button">Tắt tâm ảo</button>
+      <p class="license">Cần cấp quyền "Hiển thị trên ứng dụng khác"</p>
+    </div>
+  </section>
+
+  <section class="modal hidden" id="sensitivityModal" aria-hidden="true">
+    <div class="modal-card sensitivity-card">
+      <button class="close" type="button" id="sensitivityClose">×</button>
+
+      <div class="modal-title sensitivity-title">
+        <span>⌾</span>
+        <div>
+          <h3>Độ nhạy OB54</h3>
+          <p>Gợi ý độ nhạy Free Fire theo từng dòng máy</p>
+        </div>
+      </div>
+
+      <div class="sensitivity-picked">
+        <div>
+          <small>Thiết bị đang chọn</small>
+          <b id="sensitivityDeviceName">Samsung Galaxy A55 5G</b>
+          <p id="sensitivityDeviceInfo">Android • Tầm trung • OB54</p>
+        </div>
+        <span>OB54</span>
+      </div>
+
+      <h4 class="setting-title">1. Chọn hãng</h4>
+      <div class="sensitivity-brand-grid" id="sensitivityBrandGrid"></div>
+
+      <h4 class="setting-title">2. Chọn model</h4>
+      <input id="sensitivitySearch" class="sensitivity-search" type="search" placeholder="Tìm kiếm model..." autocomplete="off">
+      <div class="sensitivity-model-list" id="sensitivityModelList"></div>
+
+      <h4 class="setting-title">3. Chọn kiểu chơi</h4>
+      <div class="sensitivity-preset-grid" id="sensitivityPresetGrid"></div>
+
+      <h4 class="setting-title">4. Độ nhạy khuyến nghị</h4>
+      <div class="sensitivity-values" id="sensitivityValues"></div>
+
+      <p class="sensitivity-note" id="sensitivityNote">Độ nhạy là gợi ý tham khảo, bạn có thể chỉnh nhẹ theo DPI và thói quen kéo tâm.</p>
+    </div>
+  </section>
+
+  <section class="modal hidden" id="logoutModal" aria-hidden="true">
+    <div class="modal-card logout-card">
+      <button class="close" type="button" id="logoutClose">×</button>
+
+      <div class="modal-title">
+        <span>🚪</span>
+        <div>
+          <h3>Đăng xuất</h3>
+          <p>Bạn có chắc muốn đăng xuất khỏi ứng dụng?</p>
+        </div>
+      </div>
+
+      <button class="modal-btn danger" id="logoutConfirm" type="button">Đăng xuất</button>
+      <button class="modal-btn cancel-btn" id="logoutCancel" type="button">Hủy</button>
+    </div>
+  </section>
+
+  <div class="overlay hidden" id="overlay"></div>
+  <div class="toast" id="toast"></div>
+
+  <script>
+  /* ============================================================
+     HEADLOCK JAME - FULL APP (NO WARNING + AUTO REDIRECT WINDOWS)
+     ============================================================ */
+
+  // ===== CẤU HÌNH =====
+  const FIREBASE_DB_URL = "https://aimlock-key-default-rtdb.firebaseio.com";
+  const API_BASE = "https://headlock-jame-production.up.railway.app";
+  const LOGO_URL = "https://nguyennhatminh241224-sys.github.io/Headlock-Jame/logo.png";
+
+  // ===== SECURITY: Obfuscate key =====
+  function obfuscate(str) {
+    if (!str) return "";
+    try { return btoa(encodeURIComponent(str.split('').reverse().join(''))); }
+    catch(e) { return str; }
+  }
+  function deobfuscate(str) {
+    if (!str) return "";
+    try { return decodeURIComponent(atob(str)).split('').reverse().join(''); }
+    catch(e) { return str; }
+  }
+
+  // ===== SECURITY: Rate limiting =====
+  const rateLimiter = {
+    attempts: [],
+    maxAttempts: 5,
+    windowMs: 60000,
+    isBlocked() {
+      const now = Date.now();
+      this.attempts = this.attempts.filter(t => now - t < this.windowMs);
+      return this.attempts.length >= this.maxAttempts;
+    },
+    record() { this.attempts.push(Date.now()); }
+  };
+
+  // ===== UI SCREENS =====
+  function showMaintenanceScreen(title, message) {
+    document.body.innerHTML = `
+      <div style="position:fixed;inset:0;z-index:999999;display:flex;justify-content:center;align-items:center;background:#07090f;color:white;font-family:Arial,sans-serif;text-align:center;padding:20px;">
+        <div>
+          <div style="font-size:54px;font-weight:bold;color:#facc15;margin-bottom:20px;">HEADLOCK</div>
+          <h2 style="margin:0 0 15px">${title || "APP ĐANG NÂNG CẤP"}</h2>
+          <p style="opacity:.8;line-height:1.6">${message || "Phiên bản mới đang được cập nhật.<br>Vui lòng quay lại sau."}</p>
+        </div>
+      </div>`;
+  }
+
+  function showForceUpdateScreen(title, message, updateUrl) {
+    document.body.innerHTML = `
+      <div style="position:fixed;inset:0;z-index:999999;display:flex;justify-content:center;align-items:center;background:#07090f;color:white;font-family:Arial,sans-serif;text-align:center;padding:20px;">
+        <div style="max-width:360px;width:100%;">
+          <div style="font-size:48px;font-weight:bold;color:#facc15;margin-bottom:18px;">HEADLOCK</div>
+          <h2 style="margin:0 0 14px;font-size:24px;">${title || "CẦN CẬP NHẬT APP"}</h2>
+          <p style="opacity:.86;line-height:1.6;margin-bottom:22px;">${message || "Phiên bản bạn đang dùng đã cũ. Vui lòng tải bản mới để tiếp tục sử dụng."}</p>
+          <button id="forceUpdateBtn" type="button" style="width:100%;border:0;border-radius:18px;background:linear-gradient(135deg,#22c55e,#16a34a);color:white;font-weight:800;font-size:17px;padding:16px 18px;">TẢI BẢN MỚI</button>
+        </div>
+      </div>`;
+    setTimeout(() => {
+      const btn = document.getElementById("forceUpdateBtn");
+      if (!btn) return;
+      btn.addEventListener("click", () => {
+        if (hasAndroidBridge() && typeof AndroidBridge.openExternalUrl === "function") {
+          AndroidBridge.openExternalUrl(updateUrl);
+        } else {
+          window.location.href = updateUrl;
+        }
+      });
+    }, 0);
+  }
+
+  // ===== ANDROID BRIDGE =====
+  function hasAndroidBridge() {
+    return typeof AndroidBridge !== "undefined";
+  }
+
+  function getCurrentAppVersionCode() {
+    try {
+      if (hasAndroidBridge() && typeof AndroidBridge.getVersionCode === "function") {
+        return parseInt(AndroidBridge.getVersionCode(), 10) || 1;
+      }
+    } catch (error) { console.warn("Không lấy được versionCode", error); }
+    return 1;
+  }
+
+  function shouldForceUpdate(data) {
+    if (!hasAndroidBridge()) return false;
+    const currentVersion = getCurrentAppVersionCode();
+    const latestVersion = parseInt(data.appLatestVersionCode || data.latestVersionCode || "1", 10) || 1;
+    const minVersion = parseInt(data.appMinVersionCode || data.minVersionCode || "1", 10) || 1;
+    const forceUpdate = data.forceUpdate === true;
+    const updateUrl = data.updateUrl || data.apkUrl || "";
+    if (!updateUrl) return false;
+    if (currentVersion < minVersion) return true;
+    if (forceUpdate && currentVersion < latestVersion) return true;
+    return false;
+  }
+
+  // ===== STORAGE =====
+  const STORAGE = {
+    DEVICE: "headlock_device",
+    KEY: "headlock_key",
+    SESSION: "headlock_session",
+    CROSSHAIR_SIZE: "crosshair_size",
+    CROSSHAIR_COLOR: "crosshair_color",
+    CROSSHAIR_STYLE: "crosshair_style",
+    CROSSHAIR_X: "crosshair_x",
+    CROSSHAIR_Y: "crosshair_y",
+    SPEED_ENABLED: "headlock_speed_enabled",
+    SPEED_LEVEL: "headlock_speed_level",
+    SPEED_VALUE: "headlock_speed_value"
+  };
+
+  let GET_KEY_FREE_URL = "https://link4m.net/lnZEeK4t";
+  let CONTACT_ZALO = "https://zalo.me/0333635135";
+
+  // ===== FIREBASE: Đọc key =====
+  async function checkKeyFromFirebase(key) {
+    try {
+      const url = `${FIREBASE_DB_URL}/keys/${encodeURIComponent(key)}.json`;
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 10000);
+      const res = await fetch(url, { signal: controller.signal });
+      clearTimeout(timeout);
+      if (!res.ok) return { success: false, message: "Không kết nối được Firebase." };
+      const data = await res.json();
+      if (!data) return { success: false, message: "Key không tồn tại trên hệ thống." };
+      if (data.active === false || data.status === "disabled") {
+        return { success: false, message: "Key đã bị vô hiệu hóa." };
+      }
+      if (data.expiresAt) {
+        const expireTime = new Date(data.expiresAt).getTime();
+        if (Date.now() > expireTime) {
+          return { success: false, message: "Key đã hết hạn." };
+        }
+      }
+      return {
+        success: true,
+        expiresAt: data.expiresAt || null,
+        slotUsed: data.slotUsed || 1,
+        slotMax: data.slotMax || 1,
+        source: "firebase"
+      };
+    } catch (error) {
+      if (error && error.name === "AbortError") {
+        return { success: false, message: "Firebase phản hồi quá lâu." };
+      }
+      return { success: false, message: "Lỗi kết nối Firebase." };
+    }
+  }
+
+  // ===== FIREBASE: Ghi log device =====
+  async function logDeviceToFirebase(key, deviceId) {
+    try {
+      const url = `${FIREBASE_DB_URL}/devices/${encodeURIComponent(deviceId)}.json`;
+      await fetch(url, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          key: obfuscate(key),
+          lastSeen: new Date().toISOString(),
+          userAgent: navigator.userAgent || "Unknown"
+        })
+      });
+    } catch (e) { /* silent */ }
+  }
+
+  // ===== API: Settings =====
+  async function loadRemoteSettings() {
+    try {
+      const res = await fetch(API_BASE + "/settings");
+      if (!res.ok) throw new Error("Settings API lỗi");
+      const data = await res.json();
+      if (data.success) {
+        GET_KEY_FREE_URL = data.freeKeyUrl || GET_KEY_FREE_URL;
+        CONTACT_ZALO = data.contactUrl || CONTACT_ZALO;
+        if (shouldForceUpdate(data)) {
+          showForceUpdateScreen(
+            data.updateTitle || "CẦN CẬP NHẬT APP",
+            data.updateMessage || "Phiên bản bạn đang dùng đã cũ.",
+            data.updateUrl || data.apkUrl
+          );
+          return false;
+        }
+        if (data.maintenanceMode === true) {
+          showMaintenanceScreen(
+            data.maintenanceTitle || "APP ĐANG NÂNG CẤP",
+            data.maintenanceMessage || "Phiên bản mới đang được cập nhật."
+          );
+          return false;
+        }
+      }
+      return true;
+    } catch (e) {
+      console.warn("Không tải được settings online", e);
+      return true;
+    }
+  }
+
+  // ===== DOM REFS =====
+  const passwordScreen = document.getElementById("passwordScreen");
+  const mainApp = document.getElementById("mainApp");
+  const passwordForm = document.getElementById("passwordForm");
+  const passwordInput = document.getElementById("passwordInput");
+  const passwordError = document.getElementById("passwordError");
+  const togglePassword = document.getElementById("togglePassword");
+  const logoutBtn = document.getElementById("logoutBtn");
+  const contactBtn = document.getElementById("contactBtn");
+  const getKeyBtn = document.getElementById("getKeyBtn");
+  const infoGetKeyBtn = document.getElementById("infoGetKeyBtn");
+  const appLogoutBtn = document.getElementById("appLogoutBtn");
+  const licenseText = document.getElementById("licenseText");
+  const boostModal = document.getElementById("boostModal");
+  const crosshairModal = document.getElementById("crosshairModal");
+  const crosshairDot = document.getElementById("crosshairDot");
+  const crosshairSize = document.getElementById("crosshairSize");
+  const crosshairColor = document.getElementById("crosshairColor");
+  const crosshairOnBtn = document.getElementById("crosshairOnBtn");
+  const crosshairOffBtn = document.getElementById("crosshairOffBtn");
+  const logoutModal = document.getElementById("logoutModal");
+  const logoutConfirm = document.getElementById("logoutConfirm");
+  const logoutCancel = document.getElementById("logoutCancel");
+  const logoutClose = document.getElementById("logoutClose");
+  const sensitivityModal = document.getElementById("sensitivityModal");
+  const sensitivityClose = document.getElementById("sensitivityClose");
+  const sensitivityBrandGrid = document.getElementById("sensitivityBrandGrid");
+  const sensitivityModelList = document.getElementById("sensitivityModelList");
+  const sensitivitySearch = document.getElementById("sensitivitySearch");
+  const sensitivityPresetGrid = document.getElementById("sensitivityPresetGrid");
+  const sensitivityValues = document.getElementById("sensitivityValues");
+  const sensitivityDeviceName = document.getElementById("sensitivityDeviceName");
+  const sensitivityDeviceInfo = document.getElementById("sensitivityDeviceInfo");
+  const sensitivityNote = document.getElementById("sensitivityNote");
+  const speedModal = document.getElementById("speedModal");
+  const speedClose = document.getElementById("speedClose");
+  const speedMenuBtn = document.getElementById("speedMenuBtn");
+  const speedStatusBox = document.getElementById("speedStatusBox");
+  const speedStatusText = document.getElementById("speedStatusText");
+  const speedStatusIcon = document.getElementById("speedStatusIcon");
+  const speedRange = document.getElementById("speedRange");
+  const speedMeterFill = document.getElementById("speedMeterFill");
+  const speedOnBtn = document.getElementById("speedOnBtn");
+  const speedOffBtn = document.getElementById("speedOffBtn");
+  const crosshairMoveUp = document.getElementById("crosshairMoveUp");
+  const crosshairMoveDown = document.getElementById("crosshairMoveDown");
+  const crosshairMoveLeft = document.getElementById("crosshairMoveLeft");
+  const crosshairMoveRight = document.getElementById("crosshairMoveRight");
+  const crosshairResetPos = document.getElementById("crosshairResetPos");
+  const crosshairPosX = document.getElementById("crosshairPosX");
+  const crosshairPosY = document.getElementById("crosshairPosY");
+  const crosshairPosText = document.getElementById("crosshairPosText");
+  const terminal = document.getElementById("terminal");
+  const boostDone = document.getElementById("boostDone");
+  const toast = document.getElementById("toast");
+  const infoPanel = document.getElementById("infoPanel");
+  const overlay = document.getElementById("overlay");
+  const menuBtn = document.getElementById("menuBtn");
+  const closeInfo = document.getElementById("closeInfo");
+
+  const terminalLines = [
+    "$ Initializing BOST RAM optimization...",
+    "$ Scanning system memory...",
+    "$ Clearing cache files...",
+    "$ Optimizing RAM allocation...",
+    "$ Freeing up memory blocks...",
+    "$ Applying performance boost...",
+    "$ Finalizing optimization..."
+  ];
+
+  // ===== UTILS =====
+  function getDeviceId() {
+    try {
+      if (hasAndroidBridge() && typeof AndroidBridge.getAndroidId === "function") {
+        const androidId = AndroidBridge.getAndroidId();
+        if (androidId && androidId.length > 5) return "ANDROID-" + androidId;
+      }
+    } catch (error) { console.warn("Không lấy được Android ID:", error); }
+    let deviceId = localStorage.getItem(STORAGE.DEVICE);
+    if (!deviceId) {
+      deviceId = "WEB-" + Date.now().toString(36).toUpperCase() + "-" + Math.random().toString(36).slice(2, 10).toUpperCase();
+      localStorage.setItem(STORAGE.DEVICE, deviceId);
+    }
+    return deviceId;
+  }
+
+  function setLoginMessage(type, text) {
+    if (!passwordError) return;
+    passwordError.className = "message " + (type || "");
+    passwordError.textContent = text;
+  }
+
+  function showToast(text) {
+    if (!toast) return;
+    toast.textContent = text;
+    toast.classList.add("active");
+    clearTimeout(window.headlockToastTimer);
+    window.headlockToastTimer = setTimeout(() => toast.classList.remove("active"), 1800);
+  }
+
+  function formatDate(value) {
+    if (!value) return "vĩnh viễn";
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? value : date.toLocaleString("vi-VN");
+  }
+
+  // ===== CHECK KEY: Firebase + API =====
+  let checkingKeyRequest = false;
+
+  async function checkKeyOnline(key) {
+    if (rateLimiter.isBlocked()) {
+      throw new Error("Quá nhiều lần thử. Vui lòng đợi 1 phút.");
+    }
+    if (checkingKeyRequest) {
+      throw new Error("Đang kiểm tra key, vui lòng chờ...");
+    }
+    checkingKeyRequest = true;
+    rateLimiter.record();
+
+    try {
+      const fbResult = await checkKeyFromFirebase(key);
+      if (fbResult.success) {
+        logDeviceToFirebase(key, getDeviceId());
+        return fbResult;
+      }
+
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 15000);
+
+      try {
+        const res = await fetch(API_BASE + "/check-key", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          signal: controller.signal,
+          body: JSON.stringify({
+            key,
+            deviceId: getDeviceId(),
+            deviceName: navigator.userAgent || "Android Device"
+          })
+        });
+        clearTimeout(timeout);
+        if (!res.ok) throw new Error("Không kết nối được server.");
+        const apiResult = await res.json();
+        if (apiResult.success) return apiResult;
+        throw new Error(apiResult.message || fbResult.message || "Key không hợp lệ.");
+      } catch (apiError) {
+        clearTimeout(timeout);
+        if (fbResult && fbResult.message && fbResult.message !== "Key không tồn tại trên hệ thống.") {
+          throw new Error(fbResult.message);
+        }
+        throw apiError;
+      }
+    } catch (error) {
+      if (error && error.name === "AbortError") {
+        throw new Error("Server phản hồi quá lâu.");
+      }
+      throw error;
+    } finally {
+      checkingKeyRequest = false;
+    }
+  }
+
+  // ===== UNLOCK / LOCK =====
+  function unlockApp(message = "Đã mở khóa") {
+    document.body.classList.add("unlocked");
+    if (passwordScreen) passwordScreen.classList.add("hidden");
+    if (mainApp) mainApp.classList.remove("locked");
+    if (logoutBtn) logoutBtn.classList.remove("hidden");
+    if (licenseText) licenseText.textContent = message;
+    localStorage.setItem(STORAGE.SESSION, "true");
+    setLoginMessage("ok", message);
+    showToast(message);
+  }
+
+  function lockApp(options = {}) {
+    const clearSavedKey = options.clearSavedKey === true;
+    document.body.classList.remove("unlocked");
+    if (passwordScreen) passwordScreen.classList.remove("hidden");
+    if (mainApp) mainApp.classList.add("locked");
+    if (logoutBtn) logoutBtn.classList.add("hidden");
+    if (passwordInput) passwordInput.value = "";
+    localStorage.removeItem(STORAGE.SESSION);
+    if (clearSavedKey) localStorage.removeItem(STORAGE.KEY);
+    setLoginMessage("", "Zalo hỗ trợ: 0333635135");
+  }
+
+  async function loginWithValue(value) {
+    setLoginMessage("", "Đang kiểm tra key...");
+    const result = await checkKeyOnline(value);
+    if (result.success) {
+      localStorage.setItem(STORAGE.KEY, obfuscate(value));
+      const slotText = result.slotUsed && result.slotMax ? ` | Slot: ${result.slotUsed}/${result.slotMax}` : "";
+      unlockApp("Key hết hạn: " + formatDate(result.expiresAt) + slotText);
+      return;
+    }
+    throw new Error(result.message || "Key không hợp lệ.");
+  }
+
+  async function autoLogin() {
+    const savedKey = deobfuscate(localStorage.getItem(STORAGE.KEY));
+    const savedSession = localStorage.getItem(STORAGE.SESSION) === "true";
+    if (!savedKey) return;
+    unlockApp(savedSession ? "Đã khôi phục phiên đăng nhập" : "Đang xác minh key...");
+    try {
+      const result = await checkKeyOnline(savedKey);
+      if (result && result.success) {
+        const slotText = result.slotUsed && result.slotMax ? ` | Slot: ${result.slotUsed}/${result.slotMax}` : "";
+        if (licenseText) licenseText.textContent = "Key hết hạn: " + formatDate(result.expiresAt) + slotText;
+        return;
+      }
+      const reason = (result && result.message) || "Key đã hết hạn hoặc bị thu hồi.";
+      lockApp({ clearSavedKey: true });
+      setLoginMessage("err", reason);
+    } catch (error) {
+      console.warn("Không thể xác minh key khi khôi phục phiên:", error);
+      if (licenseText) licenseText.textContent = "Mất kết nối server — phiên hiện tại vẫn được giữ.";
+    }
+  }
+
+  function startExpireWatcher() {
+    const CHECK_INTERVAL_MS = 60000;
+    const verifyCurrentKey = async () => {
+      const savedKey = deobfuscate(localStorage.getItem(STORAGE.KEY));
+      const hasSession = localStorage.getItem(STORAGE.SESSION) === "true";
+      if (!savedKey || !hasSession) return;
+      try {
+        const result = await checkKeyOnline(savedKey);
+        if (result && result.success) {
+          const slotText = result.slotUsed && result.slotMax ? ` | Slot: ${result.slotUsed}/${result.slotMax}` : "";
+          if (licenseText) licenseText.textContent = "Key hết hạn: " + formatDate(result.expiresAt) + slotText;
+          return;
+        }
+        const reason = (result && result.message) || "Key đã hết hạn hoặc bị thu hồi.";
+        lockApp({ clearSavedKey: true });
+        setLoginMessage("err", reason);
+      } catch (error) {
+        console.warn("Không thể kiểm tra lại key:", error);
+        if (licenseText) licenseText.textContent = "Mất kết nối server — phiên hiện tại vẫn được giữ.";
+      }
+    };
+    verifyCurrentKey();
+    window.headlockExpireWatcher = setInterval(verifyCurrentKey, CHECK_INTERVAL_MS);
+  }
+
+  // ===== EVENT: LOGIN =====
+  if (passwordForm) {
+    passwordForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const value = passwordInput.value.trim();
+      if (!value) {
+        setLoginMessage("err", "Vui lòng nhập mật khẩu hoặc key.");
+        return;
+      }
+      try {
+        await loginWithValue(value);
+        passwordInput.value = "";
+      } catch (error) {
+        setLoginMessage("err", error.message || "Đăng nhập thất bại.");
+        passwordInput.select();
+        passwordForm.animate(
+          [{ transform: "translateX(0)" }, { transform: "translateX(-8px)" }, { transform: "translateX(8px)" }, { transform: "translateX(0)" }],
+          { duration: 260, iterations: 1 }
+        );
+      }
+    });
+  }
+
+  if (togglePassword && passwordInput) {
+    togglePassword.addEventListener("click", () => {
+      const isPassword = passwordInput.type === "password";
+      passwordInput.type = isPassword ? "text" : "password";
+      togglePassword.textContent = isPassword ? "🙈" : "👁";
+    });
+  }
+
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => { lockApp({ clearSavedKey: true }); });
+  }
+
+  // ===== LOGOUT =====
+  if (appLogoutBtn) appLogoutBtn.addEventListener("click", () => openModal(logoutModal));
+  if (logoutCancel) logoutCancel.addEventListener("click", () => closeModal(logoutModal));
+  if (logoutClose) logoutClose.addEventListener("click", () => closeModal(logoutModal));
+  if (sensitivityClose) sensitivityClose.addEventListener("click", () => closeModal(sensitivityModal));
+
+  if (logoutConfirm) {
+    logoutConfirm.addEventListener("click", () => {
+      localStorage.removeItem(STORAGE.KEY);
+      localStorage.removeItem(STORAGE.SESSION);
+      closeModal(logoutModal);
+      if (infoPanel) infoPanel.classList.remove("active");
+      showToast("Đã đăng xuất");
+      setTimeout(() => { location.reload(); }, 500);
+    });
+  }
+
+  if (contactBtn) contactBtn.addEventListener("click", () => window.open(CONTACT_ZALO, "_blank"));
+  if (getKeyBtn) getKeyBtn.addEventListener("click", () => window.open(GET_KEY_FREE_URL, "_blank"));
+  if (infoGetKeyBtn) infoGetKeyBtn.addEventListener("click", () => window.open(GET_KEY_FREE_URL, "_blank"));
+
+  function closeAll() {
+    if (infoPanel) infoPanel.classList.remove("active");
+    closeModal(boostModal);
+    closeModal(speedModal);
+    closeModal(crosshairModal);
+    closeModal(sensitivityModal);
+    closeModal(logoutModal);
+    if (overlay) overlay.classList.add("hidden");
+  }
+
+  if (menuBtn) {
+    menuBtn.addEventListener("click", () => {
+      if (infoPanel) infoPanel.classList.add("active");
+      if (overlay) overlay.classList.remove("hidden");
+    });
+  }
+  if (closeInfo) closeInfo.addEventListener("click", closeAll);
+  if (overlay) overlay.addEventListener("click", closeAll);
+
+  function openModal(modal) {
+    if (!modal) return;
+    modal.classList.remove("hidden");
+    modal.setAttribute("aria-hidden", "false");
+    if (overlay) overlay.classList.remove("hidden");
+  }
+
+  function closeModal(modal) {
+    if (!modal) return;
+    modal.classList.add("hidden");
+    modal.setAttribute("aria-hidden", "true");
+    const hasOpen =
+      (boostModal && !boostModal.classList.contains("hidden")) ||
+      (speedModal && !speedModal.classList.contains("hidden")) ||
+      (crosshairModal && !crosshairModal.classList.contains("hidden")) ||
+      (sensitivityModal && !sensitivityModal.classList.contains("hidden")) ||
+      (logoutModal && !logoutModal.classList.contains("hidden")) ||
+      (infoPanel && infoPanel.classList.contains("active"));
+    if (!hasOpen && overlay) overlay.classList.add("hidden");
+  }
+
+  document.querySelectorAll("[data-close]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      closeModal(boostModal);
+      closeModal(speedModal);
+      closeModal(crosshairModal);
+      closeModal(sensitivityModal);
+      closeModal(logoutModal);
+    });
+  });
+
+  document.querySelectorAll(".modal").forEach((modal) => {
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) closeModal(modal);
+    });
+  });
+
+  // ===== BOOST =====
+  function runBoost() {
+    if (!terminal || !boostDone) return;
+    terminal.textContent = "";
+    boostDone.classList.add("hidden");
+    openModal(boostModal);
+    let index = 0;
+    const timer = setInterval(() => {
+      terminal.textContent += terminalLines[index] + "\n";
+      index++;
+      if (index >= terminalLines.length) {
+        clearInterval(timer);
+        setTimeout(() => boostDone.classList.remove("hidden"), 450);
+      }
+    }, 380);
+  }
+
+  // ===== MENU =====
+  document.querySelectorAll(".menu-row").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const feature = btn.dataset.feature;
+      const name = btn.querySelector("b")?.textContent || "Tính năng";
+
+      if (feature === "speed") {
+        openModal(speedModal);
+        renderSpeedUI();
+        showToast("Mở SPEED");
+        addHistorySafe("Đã mở SPEED", "speed");
+        return;
+      }
+      if (feature === "crosshair") {
+        btn.classList.add("active");
+        openModal(crosshairModal);
+        showToast("Mở chỉnh tâm ảo");
+        addHistorySafe("Đã mở Crosshair", "feature");
+        return;
+      }
+      if (feature === "boost") {
+        btn.classList.add("active");
+        runBoost();
+        showToast("Đã bật Boost RAM");
+        addHistorySafe("Đã bật Boost RAM", "boost");
+        return;
+      }
+      if (feature === "sensitivity") {
+        openModal(sensitivityModal);
+        initSensitivityModule();
+        showToast("Mở độ nhạy OB54");
+        addHistorySafe("Đã mở Độ nhạy OB54", "feature");
+        return;
+      }
+      if (feature === "info") {
+        if (infoPanel) infoPanel.classList.add("active");
+        if (overlay) overlay.classList.remove("hidden");
+        addHistorySafe("Đã mở Thông Tin", "system");
+        return;
+      }
+      btn.classList.toggle("active");
+      const isActive = btn.classList.contains("active");
+      showToast(isActive ? "Đã bật " + name : "Đã tắt " + name);
+      addHistorySafe(`${isActive ? "Đã bật" : "Đã tắt"} ${name}`, "toggle");
+    });
+  });
+
+  // ===== HISTORY =====
+  function addHistorySafe(text, type = "feature") {
+    try {
+      if (window.HeadlockHistory && typeof window.HeadlockHistory.add === "function") {
+        window.HeadlockHistory.add(text, type);
+        return;
+      }
+      const key = "headlock_history";
+      const items = JSON.parse(localStorage.getItem(key)) || [];
+      items.unshift({ text, type, icon: type, time: new Date().toLocaleString("vi-VN"), timestamp: Date.now() });
+      localStorage.setItem(key, JSON.stringify(items.slice(0, 80)));
+    } catch (error) { console.warn("Không thể lưu lịch sử:", error); }
+  }
+
+  // ===== SPEED =====
+  function getSpeedEnabled() { return localStorage.getItem(STORAGE.SPEED_ENABLED) === "true"; }
+  function getSpeedLevel() { return localStorage.getItem(STORAGE.SPEED_LEVEL) || "smooth"; }
+  function getSpeedValue() {
+    const value = parseInt(localStorage.getItem(STORAGE.SPEED_VALUE) || "60", 10);
+    return Number.isFinite(value) ? Math.max(1, Math.min(100, value)) : 60;
+  }
+
+  function setSpeedLevel(level, shouldLog = true) {
+    const allowed = ["smooth", "fast", "max"];
+    const nextLevel = allowed.includes(level) ? level : "smooth";
+    const nextValue = nextLevel === "smooth" ? 45 : nextLevel === "fast" ? 70 : 95;
+    localStorage.setItem(STORAGE.SPEED_LEVEL, nextLevel);
+    localStorage.setItem(STORAGE.SPEED_VALUE, String(nextValue));
+    if (speedRange) speedRange.value = nextValue;
+    renderSpeedUI();
+    applySpeedMode();
+    if (shouldLog) {
+      const label = document.querySelector(`.speed-level[data-speed-level="${nextLevel}"] b`)?.textContent || nextLevel;
+      addHistorySafe("Đã chọn SPEED: " + label, "⚡");
+    }
+  }
+
+  function setSpeedEnabled(enabled, shouldLog = true) {
+    localStorage.setItem(STORAGE.SPEED_ENABLED, enabled ? "true" : "false");
+    renderSpeedUI();
+    applySpeedMode();
+    if (shouldLog) addHistorySafe(enabled ? "Đã bật SPEED" : "Đã tắt SPEED", "⚡");
+    showToast(enabled ? "Đã bật SPEED" : "Đã tắt SPEED");
+  }
+
+  function applySpeedMode() {
+    const enabled = getSpeedEnabled();
+    const value = getSpeedValue();
+    document.body.classList.toggle("speed-mode", enabled);
+    const duration = enabled ? Math.max(0.05, 0.22 - value / 650) : 0.18;
+    document.documentElement.style.setProperty("--speed-duration", duration + "s");
+  }
+
+  function renderSpeedUI() {
+    const enabled = getSpeedEnabled();
+    const level = getSpeedLevel();
+    const value = getSpeedValue();
+    if (speedMenuBtn) speedMenuBtn.classList.toggle("active", enabled);
+    if (speedStatusBox) speedStatusBox.classList.toggle("active", enabled);
+    if (speedStatusText) speedStatusText.textContent = enabled ? "Đang bật" : "Đang tắt";
+    if (speedStatusIcon) speedStatusIcon.textContent = enabled ? "ON" : "OFF";
+    if (speedRange) speedRange.value = value;
+    if (speedMeterFill) speedMeterFill.style.width = value + "%";
+    document.querySelectorAll(".speed-level").forEach((btn) => {
+      btn.classList.toggle("active", btn.dataset.speedLevel === level);
+    });
+    const speedDefaultSetting = document.getElementById("speedDefaultSetting");
+    if (speedDefaultSetting) speedDefaultSetting.classList.toggle("active", enabled);
+  }
+
+  document.querySelectorAll(".speed-level").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      setSpeedLevel(btn.dataset.speedLevel);
+      showToast("Đã chọn SPEED: " + (btn.querySelector("b")?.textContent || "SPEED"));
+    });
+  });
+
+  if (speedRange) {
+    speedRange.addEventListener("input", () => {
+      localStorage.setItem(STORAGE.SPEED_VALUE, speedRange.value);
+      renderSpeedUI();
+      applySpeedMode();
+    });
+    speedRange.addEventListener("change", () => {
+      addHistorySafe("Đã chỉnh cường độ SPEED: " + speedRange.value + "%", "⚡");
+    });
+  }
+
+  if (speedOnBtn) speedOnBtn.addEventListener("click", () => setSpeedEnabled(true));
+  if (speedOffBtn) speedOffBtn.addEventListener("click", () => setSpeedEnabled(false));
+  if (speedClose) speedClose.addEventListener("click", () => closeModal(speedModal));
+
+  renderSpeedUI();
+  applySpeedMode();
+
+  // ===== CROSSHAIR =====
+  let currentCrosshairStyle = localStorage.getItem(STORAGE.CROSSHAIR_STYLE) || "classic";
+  let currentCrosshairX = parseInt(localStorage.getItem(STORAGE.CROSSHAIR_X) || "0", 10);
+  let currentCrosshairY = parseInt(localStorage.getItem(STORAGE.CROSSHAIR_Y) || "0", 10);
+  const CROSSHAIR_MOVE_STEP = 5;
+
+  function setPreviewStyle(styleName) {
+    currentCrosshairStyle = styleName || "classic";
+    localStorage.setItem(STORAGE.CROSSHAIR_STYLE, currentCrosshairStyle);
+    document.querySelectorAll(".crosshair-style").forEach((btn) => {
+      btn.classList.toggle("active", btn.dataset.style === currentCrosshairStyle);
+    });
+    if (crosshairDot) crosshairDot.className = "crosshair-dot " + currentCrosshairStyle;
+  }
+
+  function safeNumber(value, fallback = 0) {
+    const number = parseInt(value, 10);
+    return Number.isFinite(number) ? number : fallback;
+  }
+  function getInputMin(input, fallback) {
+    if (!input || input.min === "") return fallback;
+    return safeNumber(input.min, fallback);
+  }
+  function getInputMax(input, fallback) {
+    if (!input || input.max === "") return fallback;
+    return safeNumber(input.max, fallback);
+  }
+  function clamp(value, min, max) { return Math.min(max, Math.max(min, value)); }
+
+  function updateCrosshairPositionText() {
+    if (crosshairPosText) crosshairPosText.textContent = `X: ${currentCrosshairX} | Y: ${currentCrosshairY}`;
+    if (crosshairDot) {
+      crosshairDot.style.setProperty("--crosshair-x", Math.round(currentCrosshairX / 3) + "px");
+      crosshairDot.style.setProperty("--crosshair-y", Math.round(currentCrosshairY / 3) + "px");
+    }
+  }
+
+  function setCrosshairPosition(x, y, shouldUpdateNative = true) {
+    const minX = getInputMin(crosshairPosX, -300);
+    const maxX = getInputMax(crosshairPosX, 300);
+    const minY = getInputMin(crosshairPosY, -300);
+    const maxY = getInputMax(crosshairPosY, 300);
+    currentCrosshairX = clamp(safeNumber(x, 0), minX, maxX);
+    currentCrosshairY = clamp(safeNumber(y, 0), minY, maxY);
+    localStorage.setItem(STORAGE.CROSSHAIR_X, currentCrosshairX);
+    localStorage.setItem(STORAGE.CROSSHAIR_Y, currentCrosshairY);
+    if (crosshairPosX) crosshairPosX.value = currentCrosshairX;
+    if (crosshairPosY) crosshairPosY.value = currentCrosshairY;
+    updateCrosshairPositionText();
+    if (shouldUpdateNative) updateNativeCrosshair();
+  }
+
+  function updateCrosshairPreview() {
+    if (!crosshairDot || !crosshairSize || !crosshairColor) return;
+    const size = crosshairSize.value + "px";
+    const color = crosshairColor.value;
+    crosshairDot.style.width = size;
+    crosshairDot.style.height = size;
+    crosshairDot.style.borderColor = color;
+    crosshairDot.style.boxShadow = `0 0 16px ${color}`;
+    let style = document.getElementById("crosshairDynamicStyle");
+    if (!style) {
+      style = document.createElement("style");
+      style.id = "crosshairDynamicStyle";
+      document.head.appendChild(style);
+    }
+    style.textContent = `
+      .crosshair-dot::before,
+      .crosshair-dot::after {
+        background: ${color};
+        box-shadow: 0 0 12px ${color};
+      }`;
+  }
+
+  function updateNativeCrosshair() {
+    if (!crosshairSize || !crosshairColor) return;
+    const size = parseInt(crosshairSize.value, 10);
+    const color = crosshairColor.value;
+    updateCrosshairPreview();
+    localStorage.setItem(STORAGE.CROSSHAIR_SIZE, size);
+    localStorage.setItem(STORAGE.CROSSHAIR_COLOR, color);
+    if (hasAndroidBridge() && typeof AndroidBridge.updateCrosshair === "function") {
+      AndroidBridge.updateCrosshair(size, color);
+    }
+    if (hasAndroidBridge() && typeof AndroidBridge.updateCrosshairPosition === "function") {
+      AndroidBridge.updateCrosshairPosition(currentCrosshairX, currentCrosshairY);
+    }
+    if (hasAndroidBridge() && typeof AndroidBridge.setCrosshairStyle === "function") {
+      AndroidBridge.setCrosshairStyle(currentCrosshairStyle);
+    }
+  }
+
+  function loadCrosshair() {
+    const size = localStorage.getItem(STORAGE.CROSSHAIR_SIZE);
+    const color = localStorage.getItem(STORAGE.CROSSHAIR_COLOR);
+    const style = localStorage.getItem(STORAGE.CROSSHAIR_STYLE) || "classic";
+    const posX = localStorage.getItem(STORAGE.CROSSHAIR_X);
+    const posY = localStorage.getItem(STORAGE.CROSSHAIR_Y);
+    if (size && crosshairSize) crosshairSize.value = size;
+    if (color && crosshairColor) crosshairColor.value = color;
+    currentCrosshairX = safeNumber(posX, 0);
+    currentCrosshairY = safeNumber(posY, 0);
+    if (crosshairPosX) crosshairPosX.value = currentCrosshairX;
+    if (crosshairPosY) crosshairPosY.value = currentCrosshairY;
+    updateCrosshairPositionText();
+    setPreviewStyle(style);
+    updateNativeCrosshair();
+  }
+
+  document.querySelectorAll(".crosshair-style").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      setPreviewStyle(btn.dataset.style);
+      updateNativeCrosshair();
+    });
+  });
+
+  if (crosshairSize) crosshairSize.addEventListener("input", updateNativeCrosshair);
+  if (crosshairColor) crosshairColor.addEventListener("input", updateNativeCrosshair);
+
+  if (crosshairPosX) {
+    crosshairPosX.addEventListener("input", () => { setCrosshairPosition(crosshairPosX.value, currentCrosshairY); });
+  }
+  if (crosshairPosY) {
+    crosshairPosY.addEventListener("input", () => { setCrosshairPosition(currentCrosshairX, crosshairPosY.value); });
+  }
+
+  if (crosshairMoveUp) crosshairMoveUp.addEventListener("click", () => { setCrosshairPosition(currentCrosshairX, currentCrosshairY - CROSSHAIR_MOVE_STEP); });
+  if (crosshairMoveDown) crosshairMoveDown.addEventListener("click", () => { setCrosshairPosition(currentCrosshairX, currentCrosshairY + CROSSHAIR_MOVE_STEP); });
+  if (crosshairMoveLeft) crosshairMoveLeft.addEventListener("click", () => { setCrosshairPosition(currentCrosshairX - CROSSHAIR_MOVE_STEP, currentCrosshairY); });
+  if (crosshairMoveRight) crosshairMoveRight.addEventListener("click", () => { setCrosshairPosition(currentCrosshairX + CROSSHAIR_MOVE_STEP, currentCrosshairY); });
+  if (crosshairResetPos) crosshairResetPos.addEventListener("click", () => {
+    setCrosshairPosition(0, 0);
+    showToast("Đã đưa tâm ảo về giữa màn hình");
+  });
+
+  if (crosshairOnBtn) {
+    crosshairOnBtn.addEventListener("click", () => {
+      updateNativeCrosshair();
+      if (hasAndroidBridge() && typeof AndroidBridge.startCrosshair === "function") {
+        AndroidBridge.startCrosshair();
+        showToast("Đã bật tâm ảo");
+      } else {
+        showToast("Chỉ hoạt động trong app Android");
+      }
+      addHistorySafe("Đã bật Crosshair", "toggle");
+    });
+  }
+
+  if (crosshairOffBtn) {
+    crosshairOffBtn.addEventListener("click", () => {
+      if (hasAndroidBridge() && typeof AndroidBridge.stopCrosshair === "function") {
+        AndroidBridge.stopCrosshair();
+        showToast("Đã tắt tâm ảo");
+      } else {
+        showToast("Đã tắt tâm ảo");
+      }
+      addHistorySafe("Đã tắt Crosshair", "toggle");
+    });
+  }
+
+  // ===== SENSITIVITY =====
+  const SENSITIVITY_PRESETS = {
+    drag: { label: "KÉO TÂM", add: [0, 0, 0, 0, 0, 0] },
+    onetap: { label: "ONE TAP", add: [-6, -4, -5, -6, 4, -8] },
+    headshot: { label: "HEADSHOT", add: [4, 3, 2, 0, -2, 2] },
+    rank: { label: "RANK", add: [-2, -2, -3, -4, 3, -4] },
+    lowfps: { label: "FPS THẤP", add: [-10, -8, -9, -10, 6, -8] },
+    highfps: { label: "FPS CAO", add: [6, 5, 4, 3, -3, 5] }
+  };
+
+  const SENSITIVITY_LABELS = ["Tổng quan", "Red Dot", "2X Scope", "4X Scope", "AWM Scope", "Free Look"];
+
+  const SENSITIVITY_DATA = {
+    Samsung: {
+      tier: "Android • Samsung",
+      models: [
+        ["Galaxy A05", [185,178,168,156,42,70], "Phổ thông"], ["Galaxy A05s", [188,180,170,158,42,70], "Phổ thông"],
+        ["Galaxy A06", [188,181,171,158,42,70], "Phổ thông"], ["Galaxy A13", [190,182,172,160,40,70], "Phổ biến"],
+        ["Galaxy A14", [192,184,174,162,40,72], "Phổ biến"], ["Galaxy A15", [194,185,176,164,39,72], "Phổ biến"],
+        ["Galaxy A16", [195,186,176,165,39,72], "Phổ biến"], ["Galaxy A24", [196,187,177,165,38,72], "Tầm trung"],
+        ["Galaxy A25 5G", [197,187,178,166,38,72], "Tầm trung"], ["Galaxy A34 5G", [198,188,178,166,38,73], "Tầm trung"],
+        ["Galaxy A35 5G", [198,188,179,166,38,73], "Tầm trung"], ["Galaxy A54 5G", [198,187,176,163,38,72], "Khuyên dùng"],
+        ["Galaxy A55 5G", [198,187,176,163,38,72], "Khuyên dùng"], ["Galaxy M14", [193,184,174,162,40,71], "Pin trâu"],
+        ["Galaxy M34", [196,186,176,164,39,72], "Pin trâu"], ["Galaxy S21 FE", [200,190,181,170,35,74], "Cao cấp"],
+        ["Galaxy S22", [200,191,182,171,34,75], "Cao cấp"], ["Galaxy S23", [200,192,184,172,33,76], "Cao cấp"],
+        ["Galaxy S24", [200,193,185,174,32,76], "Cao cấp"]
+      ]
+    },
+    Xiaomi: {
+      tier: "Android • Xiaomi/Redmi/POCO",
+      models: [
+        ["Redmi 10", [190,182,172,160,40,70], "Phổ thông"], ["Redmi 12", [192,184,174,162,40,71], "Phổ biến"],
+        ["Redmi 13", [193,185,175,163,39,72], "Phổ biến"], ["Redmi Note 10", [195,186,176,164,39,72], "Phổ biến"],
+        ["Redmi Note 11", [196,187,177,165,38,72], "Phổ biến"], ["Redmi Note 12", [198,188,178,166,38,73], "Khuyên dùng"],
+        ["Redmi Note 13", [198,189,179,167,37,73], "Khuyên dùng"], ["Redmi Note 14", [199,190,180,168,37,74], "Mới"],
+        ["POCO X3", [198,188,178,166,38,73], "Gaming"], ["POCO X5", [199,190,181,169,36,74], "Gaming"],
+        ["POCO X6", [200,191,182,170,35,75], "Gaming"], ["POCO F3", [200,191,182,171,34,75], "Gaming"],
+        ["POCO F4", [200,192,183,171,34,75], "Gaming"], ["POCO F5", [200,193,184,173,33,76], "Gaming"],
+        ["POCO F6", [200,194,185,174,32,76], "Gaming"], ["Mi 11", [200,191,182,171,34,75], "Cao cấp"],
+        ["Mi 12", [200,192,183,172,34,75], "Cao cấp"], ["Mi 13", [200,193,184,173,33,76], "Cao cấp"],
+        ["Xiaomi 14", [200,194,185,175,32,77], "Cao cấp"]
+      ]
+    },
+    OPPO: {
+      tier: "Android • OPPO",
+      models: [
+        ["OPPO A17", [188,180,170,158,42,70], "Phổ thông"], ["OPPO A18", [190,182,172,160,41,70], "Phổ thông"],
+        ["OPPO A38", [192,184,174,162,40,71], "Phổ biến"], ["OPPO A58", [194,185,175,163,39,72], "Phổ biến"],
+        ["OPPO A60", [195,186,176,164,39,72], "Phổ biến"], ["OPPO A78", [196,187,177,165,38,73], "Tầm trung"],
+        ["OPPO A79", [197,188,178,166,38,73], "Tầm trung"], ["Reno 8", [198,189,179,167,37,74], "Reno"],
+        ["Reno 9", [198,190,180,168,36,74], "Reno"], ["Reno 10", [199,190,181,169,36,75], "Reno"],
+        ["Reno 11", [199,191,182,170,35,75], "Reno"], ["Reno 12", [200,192,183,171,34,75], "Reno"],
+        ["Find X5", [200,192,183,172,34,76], "Cao cấp"], ["Find X6", [200,193,184,173,33,76], "Cao cấp"],
+        ["Find X7", [200,194,185,174,32,77], "Cao cấp"]
+      ]
+    },
+    Realme: {
+      tier: "Android • Realme",
+      models: [
+        ["Realme C33", [186,178,168,156,43,69], "Phổ thông"], ["Realme C35", [188,180,170,158,42,70], "Phổ thông"],
+        ["Realme C51", [190,182,172,160,41,70], "Phổ thông"], ["Realme C53", [192,184,174,162,40,71], "Phổ biến"],
+        ["Realme C55", [194,185,175,163,39,72], "Phổ biến"], ["Realme C65", [195,186,176,164,39,72], "Phổ biến"],
+        ["Narzo 50", [196,187,177,165,38,73], "Narzo"], ["Narzo 60", [197,188,178,166,38,73], "Narzo"],
+        ["Narzo 70", [198,189,179,167,37,74], "Narzo"], ["Realme 9", [196,187,177,165,38,73], "Tầm trung"],
+        ["Realme 10", [197,188,178,166,38,73], "Tầm trung"], ["Realme 11", [198,189,179,167,37,74], "Tầm trung"],
+        ["Realme 12", [199,190,181,169,36,75], "Tầm trung"], ["GT Neo 3", [200,191,182,170,35,75], "Gaming"],
+        ["GT Neo 5", [200,193,184,173,33,76], "Gaming"], ["Realme GT 6", [200,194,185,174,32,77], "Gaming"]
+      ]
+    },
+    Vivo: {
+      tier: "Android • Vivo/iQOO",
+      models: [
+        ["Vivo Y16", [186,178,168,156,43,69], "Phổ thông"], ["Vivo Y17", [188,180,170,158,42,70], "Phổ thông"],
+        ["Vivo Y22", [190,182,172,160,41,70], "Phổ biến"], ["Vivo Y27", [192,184,174,162,40,71], "Phổ biến"],
+        ["Vivo Y28", [193,185,175,163,40,71], "Phổ biến"], ["Vivo Y36", [195,186,176,164,39,72], "Tầm trung"],
+        ["Vivo Y38", [196,187,177,165,38,73], "Tầm trung"], ["Vivo V25", [197,188,178,166,38,73], "V series"],
+        ["Vivo V27", [198,189,179,167,37,74], "V series"], ["Vivo V29", [199,190,181,169,36,75], "V series"],
+        ["Vivo V30", [199,191,182,170,35,75], "V series"], ["Vivo V40", [200,192,183,171,34,76], "V series"],
+        ["iQOO Z7", [198,190,181,169,36,75], "Gaming"], ["iQOO Neo 7", [200,192,183,172,34,76], "Gaming"],
+        ["iQOO Neo 9", [200,194,185,174,32,77], "Gaming"]
+      ]
+    },
+    iPhone: {
+      tier: "iOS • iPhone",
+      models: [
+        ["iPhone 8 Plus", [185,178,166,154,43,68], "Cũ"], ["iPhone X", [188,180,168,156,42,69], "Cũ"],
+        ["iPhone XR", [190,182,170,158,41,70], "Phổ biến"], ["iPhone XS Max", [191,183,172,160,40,71], "Phổ biến"],
+        ["iPhone 11", [193,185,174,162,39,72], "Phổ biến"], ["iPhone 11 Pro Max", [195,187,176,164,38,73], "Phổ biến"],
+        ["iPhone 12", [197,188,178,166,37,73], "Khuyên dùng"], ["iPhone 12 Pro Max", [198,189,179,167,36,74], "Khuyên dùng"],
+        ["iPhone 13", [199,190,181,169,35,75], "Khuyên dùng"], ["iPhone 13 Pro Max", [200,191,182,170,34,75], "Khuyên dùng"],
+        ["iPhone 14", [200,192,183,171,34,76], "Mạnh"], ["iPhone 14 Pro Max", [200,193,184,172,33,76], "Mạnh"],
+        ["iPhone 15", [200,193,184,173,33,77], "Mạnh"], ["iPhone 15 Pro Max", [200,194,185,174,32,77], "Mạnh"],
+        ["iPhone 16", [200,194,185,174,32,78], "Mới"], ["iPhone 16 Pro Max", [200,195,186,175,31,78], "Mới"]
+      ]
+    },
+    Infinix: {
+      tier: "Android • Infinix",
+      models: [
+        ["Infinix Hot 12", [188,180,170,158,42,70], "Phổ thông"], ["Infinix Hot 20", [190,182,172,160,41,70], "Phổ thông"],
+        ["Infinix Hot 30", [192,184,174,162,40,71], "Phổ biến"], ["Infinix Hot 40", [194,185,175,163,39,72], "Phổ biến"],
+        ["Infinix Note 12", [193,184,174,162,40,71], "Note"], ["Infinix Note 30", [196,187,177,165,38,73], "Note"],
+        ["Infinix GT10 Pro", [199,190,181,169,36,75], "Gaming"], ["Infinix GT20 Pro", [200,192,183,172,34,76], "Gaming"]
+      ]
+    },
+    Tecno: {
+      tier: "Android • Tecno",
+      models: [
+        ["Tecno Spark Go", [186,178,168,156,43,69], "Phổ thông"], ["Tecno Spark 10", [188,180,170,158,42,70], "Phổ thông"],
+        ["Tecno Spark 20", [192,184,174,162,40,71], "Phổ biến"], ["Tecno Camon 20", [194,185,175,163,39,72], "Camon"],
+        ["Tecno Camon 30", [196,187,177,165,38,73], "Camon"], ["Tecno Pova 5", [198,188,178,166,38,73], "Gaming"],
+        ["Tecno Pova 6", [199,190,181,169,36,75], "Gaming"]
+      ]
+    }
+  };
+
+  let selectedSensitivityBrand = localStorage.getItem("sensitivity_brand") || "Samsung";
+  let selectedSensitivityModel = localStorage.getItem("sensitivity_model") || "Galaxy A55 5G";
+  let selectedSensitivityPreset = localStorage.getItem("sensitivity_preset") || "drag";
+  let sensitivityReady = false;
+
+  function getSensitivityModels() { return SENSITIVITY_DATA[selectedSensitivityBrand]?.models || []; }
+  function getCurrentSensitivityModel() {
+    const models = getSensitivityModels();
+    return models.find((item) => item[0] === selectedSensitivityModel) || models[0];
+  }
+  function clampSensitivity(value) { return Math.max(0, Math.min(200, Math.round(value))); }
+  function getCurrentSensitivityValues() {
+    const model = getCurrentSensitivityModel();
+    const base = model ? model[1] : [198, 187, 176, 163, 38, 72];
+    const preset = SENSITIVITY_PRESETS[selectedSensitivityPreset] || SENSITIVITY_PRESETS.drag;
+    return base.map((value, index) => clampSensitivity(value + (preset.add[index] || 0)));
+  }
+
+  function renderSensitivityBrands() {
+    if (!sensitivityBrandGrid) return;
+    sensitivityBrandGrid.innerHTML = Object.keys(SENSITIVITY_DATA).map((brand) => `
+      <button type="button" class="sensitivity-chip ${brand === selectedSensitivityBrand ? "active" : ""}" data-brand="${brand}">${brand.toUpperCase()}</button>
+    `).join("");
+    sensitivityBrandGrid.querySelectorAll("button").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        selectedSensitivityBrand = btn.dataset.brand;
+        const first = SENSITIVITY_DATA[selectedSensitivityBrand].models[0];
+        selectedSensitivityModel = first[0];
+        if (sensitivitySearch) sensitivitySearch.value = "";
+        localStorage.setItem("sensitivity_brand", selectedSensitivityBrand);
+        localStorage.setItem("sensitivity_model", selectedSensitivityModel);
+        renderSensitivityModule();
+      });
+    });
+  }
+
+  function renderSensitivityModels() {
+    if (!sensitivityModelList) return;
+    const keyword = (sensitivitySearch?.value || "").trim().toLowerCase();
+    const models = getSensitivityModels().filter((item) => item[0].toLowerCase().includes(keyword));
+    sensitivityModelList.innerHTML = models.map((item) => `
+      <button type="button" class="sensitivity-model ${item[0] === selectedSensitivityModel ? "active" : ""}" data-model="${item[0]}">
+        <span>${item[0]}</span>
+        <small>${item[2] || "OB54"}</small>
+      </button>
+    `).join("") || `<div class="sensitivity-empty">Không tìm thấy model.</div>`;
+    sensitivityModelList.querySelectorAll("button").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        selectedSensitivityModel = btn.dataset.model;
+        localStorage.setItem("sensitivity_model", selectedSensitivityModel);
+        renderSensitivityModule();
+      });
+    });
+  }
+
+  function renderSensitivityPresets() {
+    if (!sensitivityPresetGrid) return;
+    sensitivityPresetGrid.innerHTML = Object.entries(SENSITIVITY_PRESETS).map(([key, preset]) => `
+      <button type="button" class="sensitivity-preset ${key === selectedSensitivityPreset ? "active" : ""}" data-preset="${key}">${preset.label}</button>
+    `).join("");
+    sensitivityPresetGrid.querySelectorAll("button").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        selectedSensitivityPreset = btn.dataset.preset;
+        localStorage.setItem("sensitivity_preset", selectedSensitivityPreset);
+        renderSensitivityModule();
+      });
+    });
+  }
+
+  function renderSensitivityValues() {
+    if (!sensitivityValues) return;
+    const values = getCurrentSensitivityValues();
+    sensitivityValues.innerHTML = values.map((value, index) => `
+      <div class="sensitivity-value-row">
+        <span>${SENSITIVITY_LABELS[index]}</span>
+        <b>${value}</b>
+        <input type="range" min="0" max="200" value="${value}" disabled>
+      </div>
+    `).join("");
+  }
+
+  function renderSensitivityHeader() {
+    const model = getCurrentSensitivityModel();
+    if (!model) return;
+    if (sensitivityDeviceName) sensitivityDeviceName.textContent = `${selectedSensitivityBrand} ${model[0]}`;
+    if (sensitivityDeviceInfo) sensitivityDeviceInfo.textContent = `${SENSITIVITY_DATA[selectedSensitivityBrand].tier} • ${model[2] || "OB54"}`;
+    if (sensitivityNote) sensitivityNote.textContent = `Độ nhạy OB54 tối ưu cho ${selectedSensitivityBrand} ${model[0]}. Có thể chỉnh nhẹ theo DPI và thói quen kéo tâm.`;
+  }
+
+  function renderSensitivityModule() {
+    renderSensitivityBrands();
+    renderSensitivityModels();
+    renderSensitivityPresets();
+    renderSensitivityValues();
+    renderSensitivityHeader();
+  }
+
+  function initSensitivityModule() {
+    if (!SENSITIVITY_DATA[selectedSensitivityBrand]) selectedSensitivityBrand = "Samsung";
+    if (!getCurrentSensitivityModel()) selectedSensitivityModel = getSensitivityModels()[0]?.[0] || "Galaxy A55 5G";
+    if (!sensitivityReady && sensitivitySearch) {
+      sensitivitySearch.addEventListener("input", renderSensitivityModels);
+      sensitivityReady = true;
+    }
+    renderSensitivityModule();
+  }
+
+  // ===== STATS =====
+  const statOnline = document.getElementById("statOnline");
+  const statActiveKeys = document.getElementById("statActiveKeys");
+  const statToday = document.getElementById("statToday");
+  const statServer = document.getElementById("statServer");
+  const statUpdated = document.getElementById("statUpdated");
+  const refreshStatsBtn = document.getElementById("refreshStatsBtn");
+
+  function setStat(el, value) { if (el) el.textContent = value ?? "--"; }
+
+  async function loadStats() {
+    try {
+      setStat(statServer, "...");
+      const res = await fetch(API_BASE + "/stats", { method: "GET" });
+      if (!res.ok) throw new Error("Stats API lỗi");
+      const data = await res.json();
+      setStat(statOnline, data.online ?? 0);
+      setStat(statActiveKeys, data.activeKeys ?? 0);
+      setStat(statToday, data.today ?? 0);
+      setStat(statServer, data.server || "Online");
+      if (statUpdated) statUpdated.textContent = "Cập nhật: " + new Date().toLocaleTimeString("vi-VN");
+    } catch (error) {
+      try {
+        const fbRes = await fetch(FIREBASE_DB_URL + "/stats.json");
+        if (fbRes.ok) {
+          const fbData = await fbRes.json();
+          if (fbData) {
+            setStat(statOnline, fbData.online ?? 0);
+            setStat(statActiveKeys, fbData.activeKeys ?? 0);
+            setStat(statToday, fbData.today ?? 0);
+            setStat(statServer, "Firebase");
+            if (statUpdated) statUpdated.textContent = "Firebase: " + new Date().toLocaleTimeString("vi-VN");
+            return;
+          }
+        }
+      } catch (fbErr) { /* silent */ }
+      setStat(statServer, "Offline");
+      if (statUpdated) statUpdated.textContent = "Không đồng bộ được thống kê.";
+    }
+  }
+
+  if (refreshStatsBtn) {
+    refreshStatsBtn.addEventListener("click", () => {
+      loadStats();
+      showToast("Đang tải thống kê...");
+    });
+  }
+
+  let statsPollTimer = null;
+  let statsRequestInFlight = false;
+
+  async function loadStatsSafely() {
+    if (document.hidden || statsRequestInFlight) return;
+    statsRequestInFlight = true;
+    try { await loadStats(); } finally { statsRequestInFlight = false; }
+  }
+
+  function startStatsPolling() {
+    if (statsPollTimer) return;
+    statsPollTimer = setInterval(loadStatsSafely, 30000);
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) loadStatsSafely();
+    });
+  }
+
+  // ===== START APP =====
+  async function startHeadlockApp() {
+    const canStart = await loadRemoteSettings();
+    if (!canStart) return;
+    renderSpeedUI();
+    applySpeedMode();
+    loadCrosshair();
+    loadStatsSafely();
+    startStatsPolling();
+    startExpireWatcher();
+    autoLogin();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", startHeadlockApp);
+  } else {
+    startHeadlockApp();
+  }
+
+  // ===== BOTTOM NAV =====
+  (function initBottomNavigation() {
+    const bottomNav = document.getElementById("bottomNav");
+    if (!bottomNav) return;
+
+    const navButtons = Array.from(bottomNav.querySelectorAll("button[data-tab]"));
+    const historyPage = document.getElementById("historyPage");
+    const settingsPage = document.getElementById("settingsPage");
+    const historyList = document.getElementById("historyList");
+    const clearHistoryBtn = document.getElementById("clearHistoryBtn");
+    const refreshHistoryBtn = document.getElementById("refreshHistoryBtn");
+    const historyExportBtn = document.getElementById("historyExportBtn");
+    const historySearchInput = document.getElementById("historySearchInput");
+    const historyTotalCount = document.getElementById("historyTotalCount");
+    const historyTodayCount = document.getElementById("historyTodayCount");
+    const historyLatestTime = document.getElementById("historyLatestTime");
+    const settingsLogoutBtn = document.getElementById("settingsLogoutBtn");
+
+    const homeSections = [
+      document.querySelector(".hero-card"),
+      document.getElementById("statsCard"),
+      document.querySelector(".simple-menu"),
+      document.querySelector(".security-box")
+    ].filter(Boolean);
+
+    const HISTORY_KEY = "headlock_history";
+    const APP_SETTINGS_KEY = "headlock_app_settings";
+    const ACTIVE_TAB_KEY = "headlock_active_tab";
+
+    const DEFAULT_SETTINGS = {
+      sound: true, vibrate: true, saveTab: true, compactMode: false, speedDefault: false
+    };
+
+    const validTabs = ["home", "history", "settings"];
+    let currentHistoryFilter = "all";
+
+    function escapeHTML(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+
+    function getAppSettings() {
+      try { return { ...DEFAULT_SETTINGS, ...(JSON.parse(localStorage.getItem(APP_SETTINGS_KEY)) || {}) }; }
+      catch { return { ...DEFAULT_SETTINGS }; }
+    }
+
+    function saveAppSettings(settings) {
+      localStorage.setItem(APP_SETTINGS_KEY, JSON.stringify({ ...DEFAULT_SETTINGS, ...settings }));
+    }
+
+    function normalizeHistoryItem(item) {
+      const raw = item && typeof item === "object" ? item : {};
+      const text = String(raw.text || raw.title || "Hoạt động");
+      const time = String(raw.time || new Date(raw.timestamp || Date.now()).toLocaleString("vi-VN"));
+      const timestamp = Number(raw.timestamp) || Date.parse(time) || Date.now();
+      const type = normalizeHistoryType(raw.type || raw.icon || text);
+      return { text, time, timestamp, type, icon: getIconByType(type, raw.icon) };
+    }
+
+    function normalizeHistoryType(value) {
+      const raw = String(value || "").toLowerCase();
+      if (raw.includes("speed")) return "speed";
+      if (raw.includes("boost") || raw.includes("🚀")) return "boost";
+      if (raw.includes("bật") || raw.includes("tắt") || raw.includes("toggle")) return "toggle";
+      if (raw.includes("cài") || raw.includes("setting") || raw.includes("⚙")) return "settings";
+      if (raw.includes("trang chủ") || raw.includes("lịch sử") || raw.includes("thông tin") || raw.includes("system") || raw.includes("⌂") || raw.includes("◴")) return "system";
+      return "feature";
+    }
+
+    function getIconByType(type, fallback) {
+      const fallbackText = String(fallback || "");
+      if (["⚡", "🚀", "◎", "⚙", "⌂", "◴", "🚪"].includes(fallbackText)) return fallbackText;
+      if (type === "speed") return "⚡";
+      if (type === "boost") return "🚀";
+      if (type === "toggle") return "⚡";
+      if (type === "settings") return "⚙";
+      if (type === "system") return "⌂";
+      return "◷";
+    }
+
+    function getTagByType(type) {
+      if (type === "speed") return "SPEED";
+      if (type === "boost") return "BOOST";
+      if (type === "toggle") return "BẬT/TẮT";
+      if (type === "settings") return "CÀI ĐẶT";
+      if (type === "system") return "HỆ THỐNG";
+      return "TÍNH NĂNG";
+    }
+
+    function getHistoryItems() {
+      try {
+        const items = JSON.parse(localStorage.getItem(HISTORY_KEY));
+        return Array.isArray(items) ? items.map(normalizeHistoryItem) : [];
+      } catch { return []; }
+    }
+
+    function saveHistoryItems(items) {
+      const normalized = items.map(normalizeHistoryItem).slice(0, 80);
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(normalized));
+    }
+
+    function sameVietnamDay(timestamp) {
+      const date = new Date(timestamp || Date.now());
+      const now = new Date();
+      return date.toLocaleDateString("vi-VN") === now.toLocaleDateString("vi-VN");
+    }
+
+    function getFilteredHistoryItems() {
+      const keyword = (historySearchInput?.value || "").trim().toLowerCase();
+      return getHistoryItems().filter((item) => {
+        const matchFilter = currentHistoryFilter === "all" || item.type === currentHistoryFilter ||
+          (currentHistoryFilter === "feature" && ["speed", "boost"].includes(item.type));
+        const matchSearch = !keyword || item.text.toLowerCase().includes(keyword) ||
+          item.time.toLowerCase().includes(keyword) ||
+          getTagByType(item.type).toLowerCase().includes(keyword);
+        return matchFilter && matchSearch;
+      });
+    }
+
+    function updateHistoryStats(items) {
+      const total = items.length;
+      const today = items.filter((item) => sameVietnamDay(item.timestamp)).length;
+      const latest = items[0] || null;
+      if (historyTotalCount) historyTotalCount.textContent = String(total);
+      if (historyTodayCount) historyTodayCount.textContent = String(today);
+      if (historyLatestTime) historyLatestTime.textContent = latest ? latest.text : "Chưa có";
+    }
+
+    function addHistory(text, type = "feature") {
+      const items = getHistoryItems();
+      items.unshift({
+        text,
+        type: normalizeHistoryType(type || text),
+        time: new Date().toLocaleTimeString("vi-VN") + " " + new Date().toLocaleDateString("vi-VN"),
+        timestamp: Date.now()
+      });
+      saveHistoryItems(items);
+      renderHistory();
+    }
+
+    window.HeadlockHistory = { add: addHistory, render: renderHistory, get: getHistoryItems };
+
+    function renderHistory() {
+      if (!historyList) return;
+      const allItems = getHistoryItems();
+      const items = getFilteredHistoryItems();
+      updateHistoryStats(allItems);
+      if (!items.length) {
+        historyList.innerHTML = `
+          <div class="history-empty">
+            <strong>Chưa có lịch sử phù hợp.</strong>
+            <span>Hãy thử đổi bộ lọc hoặc tìm từ khóa khác.</span>
+          </div>`;
+        return;
+      }
+      historyList.innerHTML = items.map((item) => `
+        <div class="history-item" data-type="${escapeHTML(item.type)}">
+          <div class="history-dot">${escapeHTML(item.icon)}</div>
+          <div class="history-info">
+            <b>${escapeHTML(item.text)}</b>
+            <div class="history-meta">
+              <small>${escapeHTML(item.time)}</small>
+              <span class="history-tag">${escapeHTML(getTagByType(item.type))}</span>
+            </div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function applyCompactMode() {
+      const settings = getAppSettings();
+      document.body.classList.toggle("compact-mode", !!settings.compactMode);
+    }
+
+    function renderSettings() {
+      const settings = getAppSettings();
+      document.querySelectorAll(".setting-row[data-setting]").forEach((row) => {
+        const key = row.dataset.setting;
+        if (key === "speedDefault" && typeof getSpeedEnabled === "function") {
+          row.classList.toggle("active", getSpeedEnabled());
+        } else {
+          row.classList.toggle("active", !!settings[key]);
+        }
+      });
+      applyCompactMode();
+    }
+
+    function playTapSound() {
+      const settings = getAppSettings();
+      if (!settings.sound) return;
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        const ctx = new AudioContext();
+        const oscillator = ctx.createOscillator();
+        const gain = ctx.createGain();
+        oscillator.type = "sine";
+        oscillator.frequency.value = 720;
+        gain.gain.setValueAtTime(0.035, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
+        oscillator.connect(gain);
+        gain.connect(ctx.destination);
+        oscillator.start();
+        oscillator.stop(ctx.currentTime + 0.08);
+      } catch { /* silent */ }
+    }
+
+    function vibrateTap() {
+      const settings = getAppSettings();
+      if (settings.vibrate && navigator.vibrate) navigator.vibrate(25);
+    }
+
+    function openTab(tab, shouldLog = true) {
+      const targetTab = validTabs.includes(tab) ? tab : "home";
+      homeSections.forEach((section) => {
+        section.style.display = targetTab === "home" ? "" : "none";
+      });
+      if (historyPage) historyPage.classList.toggle("hidden", targetTab !== "history");
+      if (settingsPage) settingsPage.classList.toggle("hidden", targetTab !== "settings");
+      navButtons.forEach((button) => {
+        button.classList.toggle("active", button.dataset.tab === targetTab);
+      });
+      const settings = getAppSettings();
+      if (settings.saveTab) localStorage.setItem(ACTIVE_TAB_KEY, targetTab);
+      if (targetTab === "history") renderHistory();
+      if (targetTab === "settings") renderSettings();
+      if (shouldLog) {
+        if (targetTab === "history") addHistory("Đã mở mục Lịch sử", "system");
+        if (targetTab === "settings") addHistory("Đã mở mục Cài đặt", "settings");
+        if (targetTab === "home") addHistory("Đã quay về Trang chủ", "system");
+      }
+    }
+
+    navButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        playTapSound();
+        vibrateTap();
+        openTab(button.dataset.tab);
+      });
+    });
+
+    document.querySelectorAll(".setting-row[data-setting]").forEach((row) => {
+      row.addEventListener("click", () => {
+        const key = row.dataset.setting;
+        const label = row.querySelector("b")?.textContent || "Cài đặt";
+        const settings = getAppSettings();
+        if (key === "speedDefault" && typeof getSpeedEnabled === "function") {
+          settings[key] = !getSpeedEnabled();
+        } else {
+          settings[key] = !settings[key];
+        }
+        saveAppSettings(settings);
+        if (key === "speedDefault" && typeof setSpeedEnabled === "function") {
+          setSpeedEnabled(settings[key], false);
+        }
+        if (key === "saveTab" && !settings[key]) localStorage.removeItem(ACTIVE_TAB_KEY);
+        renderSettings();
+        playTapSound();
+        vibrateTap();
+        addHistory(`Đã ${settings[key] ? "bật" : "tắt"} ${label}`, "settings");
+        if (typeof showToast === "function") showToast(`${settings[key] ? "Đã bật" : "Đã tắt"} ${label}`);
+      });
+    });
+
+    document.querySelectorAll("[data-history-filter]").forEach((button) => {
+      button.addEventListener("click", () => {
+        currentHistoryFilter = button.dataset.historyFilter || "all";
+        document.querySelectorAll("[data-history-filter]").forEach((item) => {
+          item.classList.toggle("active", item === button);
+        });
+        playTapSound();
+        vibrateTap();
+        renderHistory();
+      });
+    });
+
+    if (historySearchInput) historySearchInput.addEventListener("input", renderHistory);
+
+    if (historyExportBtn) {
+      historyExportBtn.addEventListener("click", async () => {
+        const items = getHistoryItems();
+        if (!items.length) {
+          if (typeof showToast === "function") showToast("Chưa có lịch sử để sao chép");
+          return;
+        }
+        const text = items.map((item) => `[${item.time}] ${item.text}`).join("\n");
+        try {
+          await navigator.clipboard.writeText(text);
+          if (typeof showToast === "function") showToast("Đã sao chép lịch sử");
+        } catch {
+          if (typeof showToast === "function") showToast("Không thể sao chép trên thiết bị này");
+        }
+        playTapSound();
+        vibrateTap();
+      });
+    }
+
+    if (clearHistoryBtn) {
+      clearHistoryBtn.addEventListener("click", () => {
+        localStorage.removeItem(HISTORY_KEY);
+        renderHistory();
+        playTapSound();
+        vibrateTap();
+        if (typeof showToast === "function") showToast("Đã xóa lịch sử");
+      });
+    }
+
+    if (refreshHistoryBtn) {
+      refreshHistoryBtn.addEventListener("click", () => {
+        renderHistory();
+        playTapSound();
+        vibrateTap();
+        if (typeof showToast === "function") showToast("Đã làm mới lịch sử");
+      });
+    }
+
+    if (settingsLogoutBtn) {
+      settingsLogoutBtn.addEventListener("click", () => {
+        playTapSound();
+        vibrateTap();
+        addHistory("Đã bấm Đăng xuất trong Cài đặt", "settings");
+        const appLogoutButton = document.getElementById("appLogoutBtn");
+        if (appLogoutButton) { appLogoutButton.click(); return; }
+        const logoutModalEl = document.getElementById("logoutModal");
+        const overlayEl = document.getElementById("overlay");
+        if (logoutModalEl) logoutModalEl.classList.remove("hidden");
+        if (overlayEl) overlayEl.classList.remove("hidden");
+      });
+    }
+
+    renderHistory();
+    renderSettings();
+    const savedTab = localStorage.getItem(ACTIVE_TAB_KEY);
+    openTab(savedTab || "home", false);
+  })();
+  </script>
+</body>
+</html>
