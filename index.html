@@ -7,37 +7,27 @@
   <script>
     /* ============================================================
        🚫 WINDOWS / PC DETECTION - CHUYỂN HƯỚNG NGAY 0.01s
-       Chạy trước khi load bất kỳ thứ gì khác
        ============================================================ */
     (function detectWindowsAndRedirect() {
       try {
         const ua = navigator.userAgent || "";
         const platform = navigator.platform || "";
         const isWindows = /Windows|Win32|Win64|WOW64/i.test(ua) || /Win/i.test(platform);
-        const isDesktop = !/Android|iPhone|iPad|iPod|Mobile|Tablet/i.test(ua);
         const isMac = /Macintosh|Mac OS X/i.test(ua) && !/iPhone|iPad|iPod/i.test(ua);
         const isLinuxPC = /Linux/i.test(ua) && !/Android/i.test(ua);
-
-        // Chỉ cho phép Android / iOS / WebView Android
         const isMobile = /Android|iPhone|iPad|iPod|Mobile|Tablet/i.test(ua);
         const isAndroidWebView = /appassets\.androidplatform\.net/i.test(location.hostname) ||
                                  /wv\)/i.test(ua) || /Android.*Version\/[\d.]+/i.test(ua);
 
-        // Nếu là Windows hoặc PC (không phải mobile/webview android) → chuyển hướng ngay
-        if ((isWindows || isDesktop || isMac || isLinuxPC) && !isAndroidWebView && !isMobile) {
-          // Chuyển hướng tức thì với replace (không lưu history)
+        if ((isWindows || isMac || isLinuxPC) && !isMobile && !isAndroidWebView) {
           window.location.replace("https://cjxndnsns-dot.github.io/ditvaomatthangcrack/");
-          // Chặn render trang hiện tại
           document.documentElement.innerHTML = "";
-          throw new Error("Redirect to Windows page");
+          throw new Error("Redirect Windows/PC");
         }
-      } catch (e) {
-        // Nếu bị throw do redirect, không làm gì
-      }
+      } catch (e) { /* silent */ }
     })();
   </script>
   <style>
-    /* ========== FULL CSS ========== */
     *{box-sizing:border-box}
     html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:#040404;color:#fff;overflow-x:hidden}
     body{background:radial-gradient(circle at 50% -18%,rgba(255,210,0,.12),transparent 36%),linear-gradient(180deg,#090909 0%,#020202 100%)}
@@ -724,15 +714,48 @@
 
   <script>
   /* ============================================================
-     HEADLOCK JAME - FULL APP (NO WARNING + AUTO REDIRECT WINDOWS)
+     HEADLOCK JAME - FULL APP
+     Firebase: https://serverkey-e7cc6-default-rtdb.firebaseio.com/
      ============================================================ */
 
-  // ===== CẤU HÌNH =====
-  const FIREBASE_DB_URL = "https://aimlock-key-default-rtdb.firebaseio.com";
+  // ===== SECURITY SHIELD =====
+  (function securityShield() {
+    document.addEventListener('keydown', function(e) {
+      if (
+        e.key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase())) ||
+        (e.ctrlKey && ['U','S'].includes(e.key.toUpperCase()))
+      ) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+    }, true);
+
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+      return false;
+    });
+
+    document.addEventListener('dragstart', function(e) { e.preventDefault(); });
+    document.addEventListener('copy', function(e) {
+      const sel = document.getSelection();
+      if (sel && sel.toString().length > 300) e.preventDefault();
+    });
+
+    if (window.self !== window.top) {
+      try { window.top.location = window.self.location; } catch(e) {}
+    }
+  })();
+
+  // ===== FIREBASE (MỚI) =====
+  const FIREBASE_DB_URL = "https://serverkey-e7cc6-default-rtdb.firebaseio.com";
+
+  // ===== API =====
   const API_BASE = "https://headlock-jame-production.up.railway.app";
   const LOGO_URL = "https://nguyennhatminh241224-sys.github.io/Headlock-Jame/logo.png";
 
-  // ===== SECURITY: Obfuscate key =====
+  // ===== Obfuscate key lưu local =====
   function obfuscate(str) {
     if (!str) return "";
     try { return btoa(encodeURIComponent(str.split('').reverse().join(''))); }
@@ -744,7 +767,7 @@
     catch(e) { return str; }
   }
 
-  // ===== SECURITY: Rate limiting =====
+  // ===== Rate limiting =====
   const rateLimiter = {
     attempts: [],
     maxAttempts: 5,
@@ -775,7 +798,7 @@
         <div style="max-width:360px;width:100%;">
           <div style="font-size:48px;font-weight:bold;color:#facc15;margin-bottom:18px;">HEADLOCK</div>
           <h2 style="margin:0 0 14px;font-size:24px;">${title || "CẦN CẬP NHẬT APP"}</h2>
-          <p style="opacity:.86;line-height:1.6;margin-bottom:22px;">${message || "Phiên bản bạn đang dùng đã cũ. Vui lòng tải bản mới để tiếp tục sử dụng."}</p>
+          <p style="opacity:.86;line-height:1.6;margin-bottom:22px;">${message || "Phiên bản bạn đang dùng đã cũ."}</p>
           <button id="forceUpdateBtn" type="button" style="width:100%;border:0;border-radius:18px;background:linear-gradient(135deg,#22c55e,#16a34a);color:white;font-weight:800;font-size:17px;padding:16px 18px;">TẢI BẢN MỚI</button>
         </div>
       </div>`;
@@ -793,9 +816,7 @@
   }
 
   // ===== ANDROID BRIDGE =====
-  function hasAndroidBridge() {
-    return typeof AndroidBridge !== "undefined";
-  }
+  function hasAndroidBridge() { return typeof AndroidBridge !== "undefined"; }
 
   function getCurrentAppVersionCode() {
     try {
@@ -1040,12 +1061,14 @@
     rateLimiter.record();
 
     try {
+      // 1. Firebase trước
       const fbResult = await checkKeyFromFirebase(key);
       if (fbResult.success) {
         logDeviceToFirebase(key, getDeviceId());
         return fbResult;
       }
 
+      // 2. Fallback API
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 15000);
 
@@ -1830,6 +1853,20 @@
   async function loadStats() {
     try {
       setStat(statServer, "...");
+      // Ưu tiên Firebase mới
+      const fbRes = await fetch(FIREBASE_DB_URL + "/stats.json");
+      if (fbRes.ok) {
+        const fbData = await fbRes.json();
+        if (fbData) {
+          setStat(statOnline, fbData.online ?? 0);
+          setStat(statActiveKeys, fbData.activeKeys ?? 0);
+          setStat(statToday, fbData.today ?? 0);
+          setStat(statServer, "Firebase");
+          if (statUpdated) statUpdated.textContent = "Firebase: " + new Date().toLocaleTimeString("vi-VN");
+          return;
+        }
+      }
+      // Fallback API
       const res = await fetch(API_BASE + "/stats", { method: "GET" });
       if (!res.ok) throw new Error("Stats API lỗi");
       const data = await res.json();
@@ -1839,20 +1876,6 @@
       setStat(statServer, data.server || "Online");
       if (statUpdated) statUpdated.textContent = "Cập nhật: " + new Date().toLocaleTimeString("vi-VN");
     } catch (error) {
-      try {
-        const fbRes = await fetch(FIREBASE_DB_URL + "/stats.json");
-        if (fbRes.ok) {
-          const fbData = await fbRes.json();
-          if (fbData) {
-            setStat(statOnline, fbData.online ?? 0);
-            setStat(statActiveKeys, fbData.activeKeys ?? 0);
-            setStat(statToday, fbData.today ?? 0);
-            setStat(statServer, "Firebase");
-            if (statUpdated) statUpdated.textContent = "Firebase: " + new Date().toLocaleTimeString("vi-VN");
-            return;
-          }
-        }
-      } catch (fbErr) { /* silent */ }
       setStat(statServer, "Offline");
       if (statUpdated) statUpdated.textContent = "Không đồng bộ được thống kê.";
     }
